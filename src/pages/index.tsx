@@ -25,6 +25,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <LoginButton />
+      <h1>Hello, {session?.user?.name}</h1>
       <Map
         mapboxAccessToken={token}
         initialViewState={{
