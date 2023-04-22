@@ -1,5 +1,6 @@
+import { useFrame } from '@react-three/fiber';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 const ThreeJS = () => {
   const ref = useRef<THREE.Mesh>(null!);
