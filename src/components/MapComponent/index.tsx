@@ -125,11 +125,9 @@ const MapComponent = () => {
   const mapLoad = () => {
     const map = mapRef.current?.getMap();
     if (!map) {
-      console.log('failed load');
       return;
     }
     window.map = map;
-    console.log('map load!');
     loadLocation(map, 'food', ucla);
   };
 

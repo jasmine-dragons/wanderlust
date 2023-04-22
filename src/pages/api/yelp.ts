@@ -22,19 +22,3 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     return res.status(400).json({ error: 'ah' });
   }
 }
-
-// const searchRequest = {
-//   term: 'the lazy daisy cafe',
-//   location: 'ucla',
-// };
-
-// client
-//   .search(searchRequest)
-//   .then((response: any) => {
-//     const firstResult = response.jsonBody.businesses[0];
-//     const prettyJson = JSON.stringify(firstResult, null, 4);
-//     console.log(prettyJson);
-//   })
-//   .catch((e: any) => {
-//     console.log(e);
-//   });

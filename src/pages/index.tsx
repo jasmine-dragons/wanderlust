@@ -54,12 +54,10 @@ const Home: NextPage = () => {
   const generateDisplayResults = async (popularVideos: TiktokResponse[]) => {
     setDisplaySearchResults([]);
     for (const video of popularVideos) {
-      console.log(video);
       const yelp = await axios.post('/api/yelp', {
         term: video.name,
         location: search2,
       });
-      // console.log({ data: JSON.parse(yelp.data) });
       const data = JSON.parse(yelp.data);
       const returnObject: MapItemType = {
         image: data.image_url,
@@ -74,7 +72,6 @@ const Home: NextPage = () => {
         displayAddress: data.location.display_address,
         categories: data.categories.map((item: { alias: string; title: string }) => item.title),
       };
-      console.log({ returnObject });
       setDisplaySearchResults(current => [...current, returnObject]);
     }
   };
@@ -174,8 +171,11 @@ const Home: NextPage = () => {
               />
               <button
                 onClick={() => {
-                  console.log({ search1, search2 });
-                  const popularVideos = fetchPopularTiktoksForTerm(search1, search2).slice(0, 5);
+                  const popularVideos: TiktokResponse[] = fetchPopularTiktoksForTerm(
+                    search1,
+                    search2
+                  ).slice(0, 5);
+                  // TODO: Randomize results
 
                   generateDisplayResults(popularVideos);
                 }}
