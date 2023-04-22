@@ -2,12 +2,15 @@
  * Example page component
  */
 import styles from '@/styles/pages/Home.module.scss';
+import { Canvas } from '@react-three/fiber';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { NextPage } from 'next';
 import Map, { Marker } from 'react-map-gl';
+import ThreeJS from '../components/ThreeJS';
 
 const Home: NextPage = () => {
   const token = process.env.NEXT_PUBLIC_AUTH_TOKEN;
+
   return (
     <div className={styles.container}>
       <Map
@@ -22,7 +25,12 @@ const Home: NextPage = () => {
         mapStyle="mapbox://styles/mapbox/streets-v9"
       >
         <Marker longitude={-122.4} latitude={37.8} anchor="bottom">
-          <img src="pin.png" />
+          {/* <img src="pin.png" /> */}
+          <Canvas>
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
+            <ThreeJS />
+          </Canvas>
         </Marker>
       </Map>
     </div>
