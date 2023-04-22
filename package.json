@@ -40,7 +40,9 @@
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1",
     "three": "^0.151.3",
-    "typescript": "5.0.4"
+    "threebox-plugin": "^2.2.7",
+    "typescript": "5.0.4",
+    "yelp-fusion": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^8.38.0",
