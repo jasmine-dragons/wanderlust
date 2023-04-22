@@ -1,0 +1,11 @@
+Model Information:
+* title:	Microphone
+* source:	https://sketchfab.com/3d-models/microphone-9c8483481a134ecf84d3864b45faca6a
+* author:	spookyghostboo (https://sketchfab.com/spookyghostboo)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Microphone" (https://sketchfab.com/3d-models/microphone-9c8483481a134ecf84d3864b45faca6a) by spookyghostboo (https://sketchfab.com/spookyghostboo) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,8 +1,7 @@
-import ThreeJS from '@/components/ThreeJS';
 import { Canvas } from '@react-three/fiber';
 import mapboxgl from 'mapbox-gl';
 import { useRef } from 'react';
-import Map, { GeolocateControl, MapRef, Marker } from 'react-map-gl';
+import Map, { GeolocateControl, MapRef, Marker, NavigationControl } from 'react-map-gl';
 import { Threebox } from 'threebox-plugin';
 
 declare var window: any;
@@ -28,18 +27,57 @@ type CompoundModelOptions = {
 const models = {
   food: {
     adornment: {
-      obj: '/shiba/scene.gltf',
+      obj: '/burger/scene.gltf',
       type: 'gltf',
-      scale: 25,
+      scale: 60,
       units: 'meters',
       anchor: 'center',
       rotation: { x: -90, y: 0, z: 180 },
       adjustment: { x: 0, y: 0, z: 1.5 },
     },
     base: {
-      obj: '/shiba/scene.gltf',
+      obj: '/burger/scene.gltf',
       type: 'gltf',
-      scale: 40,
+      scale: 100,
+      units: 'meters',
+      anchor: 'center',
+      rotation: { x: -90, y: 0, z: 180 },
+    },
+  },
+
+  entertainment: {
+    adornment: {
+      obj: '/microphone/scene.gltf',
+      type: 'gltf',
+      scale: 60,
+      units: 'meters',
+      anchor: 'center',
+      rotation: { x: -90, y: 0, z: 180 },
+      adjustment: { x: 0, y: 0, z: 1.5 },
+    },
+    base: {
+      obj: '/microphone/scene.gltf',
+      type: 'gltf',
+      scale: 0.5,
+      units: 'meters',
+      anchor: 'center',
+      rotation: { x: -90, y: 0, z: 180 },
+    },
+  },
+  sightseeing: {
+    adornment: {
+      obj: '/binoculars/scene.gltf',
+      type: 'gltf',
+      scale: 10,
+      units: 'meters',
+      anchor: 'center',
+      rotation: { x: -90, y: 0, z: 180 },
+      adjustment: { x: 0, y: 0, z: 1.5 },
+    },
+    base: {
+      obj: '/binoculars/scene.gltf',
+      type: 'gltf',
+      scale: 10,
       units: 'meters',
       anchor: 'center',
       rotation: { x: -90, y: 0, z: 180 },
@@ -61,7 +99,7 @@ function loadLocation(map: mapboxgl.Map, modelType: ModelType, location: Locatio
       window.tb.loadObj(models[modelType].base, (obj: any) => {
         const model = obj.setCoords([location.lat, location.lng]);
         window.tb.add(model);
-        addAdornment();
+        // addAdornment();
       });
     },
     render(gl, matrix) {
@@ -101,34 +139,15 @@ const MapComponent = () => {
   const mapRef = useRef<MapRef>(null);
   const token = process.env.NEXT_PUBLIC_MAP_TOKEN;
 
-  const addFood = (map: any, origin: Location) => {
-    let model: any;
-
-    window.tb.loadObj(models.food.adornment, function (obj: any) {
-      model = obj.setCoords([origin.lat, origin.lng]);
-      window.tb.add(model);
-
-      // comment out animation for now -
-      // first needa figure out how to get this whole thing to work
-      let rotation = 0;
-      function animate() {
-        setTimeout(function () {
-          requestAnimationFrame(animate);
-        }, 1000 / 20);
-        model.setRotation({ x: 0, y: 0, z: (rotation += 10) });
-      }
-
-      animate();
-    });
-  };
-
   const mapLoad = () => {
     const map = mapRef.current?.getMap();
     if (!map) {
       return;
     }
     window.map = map;
-    loadLocation(map, 'food', ucla);
+    // loadLocation(map, 'food', ucla);
+    // loadLocation(map, 'entertainment', ucla);
+    loadLocation(map, 'sightseeing', ucla);
   };
 
   return (
@@ -141,6 +160,8 @@ const MapComponent = () => {
         latitude: ucla.lng,
         zoom: 14,
       }}
+      // maxZoom={18}
+      // minZoom={12}
       projection="globe"
       style={{ width: '100%', height: '100%' }}
       mapStyle="mapbox://styles/mapbox/streets-v9"
@@ -150,9 +171,10 @@ const MapComponent = () => {
         <Canvas>
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
-          <ThreeJS />
+          {/* <ThreeJS /> */}
         </Canvas>
       </Marker>
+      <NavigationControl position="bottom-right" visualizePitch={true} />
       <GeolocateControl
         trackUserLocation={true}
         showUserHeading={false}
