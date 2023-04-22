@@ -1,18 +1,30 @@
 /**
  * Example page component
  */
+import LoginButton from '@/components/LoginButton';
+import ThreeJS from '@/components/ThreeJS';
 import styles from '@/styles/pages/Home.module.scss';
 import { Canvas } from '@react-three/fiber';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import Map, { Marker } from 'react-map-gl';
-import ThreeJS from '../components/ThreeJS';
 
 const Home: NextPage = () => {
-  const token = process.env.NEXT_PUBLIC_AUTH_TOKEN;
+  const { data: session } = useSession();
+  const router = useRouter();
 
+  useEffect(() => {
+    if (!session?.user) {
+      router.push('/login');
+    }
+  }, [session?.user]);
+  const token = process.env.NEXT_PUBLIC_MAP_TOKEN;
   return (
     <div className={styles.container}>
+      <LoginButton />
       <Map
         mapboxAccessToken={token}
         initialViewState={{

@@ -1,6 +1,8 @@
 import '@/styles/globals.scss';
 import '@/styles/reset.scss';
 import '@/styles/vars.scss';
+import { SessionProvider } from 'next-auth/react';
+
 import { DM_Sans as DMSans } from 'next/font/google';
 
 import type { AppProps } from 'next/app';
@@ -15,7 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
           font-family: ${dmSans.style.fontFamily}, sans-serif;
         }
       `}</style>
-      <Component {...pageProps} />
+      <SessionProvider session={pageProps.session}>
+        <Component {...pageProps} />
+      </SessionProvider>
     </>
   );
 }
