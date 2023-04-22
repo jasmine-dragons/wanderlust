@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "rvest.vs-code-prettier-eslint",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "hex-ci.stylelint-plus",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag",
+    "vincaslt.highlight-matching-tag",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "burkeholland.simple-react-snippets"
+  ]
+}

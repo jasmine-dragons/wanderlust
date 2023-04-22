@@ -1,0 +1,56 @@
+{
+  "name": "next-hackathon-template",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "yarn@1.22.19",
+  "engines": {
+    "node": ">=18",
+    "yarn": ">=1.22",
+    "npm": "use-yarn-not-npm"
+  },
+  "scripts": {
+    "prettier": "prettier --write ./src",
+    "dev": "yarn type-css && next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint:js": "next lint",
+    "lint:css": "stylelint \"**/*.scss\"",
+    "lint": "yarn lint:js && yarn lint:css",
+    "lint:fix": "yarn prettier && eslint --fix \"src/**/*.+(js|jsx|ts|tsx)\" && stylelint --fix \"**/*.scss\"",
+    "type-css": "yarn typed-scss-modules src/ --exportType default",
+    "prod": "yarn type-css && yarn lint && next build && next start"
+  },
+  "dependencies": {
+    "@types/node": "18.15.12",
+    "@types/react": "18.0.37",
+    "@types/react-dom": "18.0.11",
+    "axios": "^1.3.6",
+    "mapbox-gl": "^2.14.1",
+    "next": "13.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-map-gl": "^7.0.23",
+    "sass": "^1.62.0",
+    "sharp": "^0.32.0",
+    "three": "^0.151.3",
+    "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-next": "^13.3.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsdoc": "^43.0.6",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "postcss": "^8",
+    "prettier": "^2.8.7",
+    "stylelint": "^15.5.0",
+    "stylelint-config-sass-guidelines": "^10.0.0",
+    "stylelint-order": "^6.0.3",
+    "typed-scss-modules": "^7.1.0"
+  }
+}
