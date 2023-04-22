@@ -1,0 +1,32 @@
+.logout {
+  background-color: #1e90ff;
+  border-radius: 4px;
+  color: #fff;
+  padding: 4px 8px;
+  transition: 0.4s ease-in-out all;
+
+  width: fit-content;
+
+  &:hover {
+    background-color: hsl(210, 100%, 97%);
+    color: #1e90ff;
+    outline: 1px solid #1e90ff;
+  }
+}
+
+.login {
+  background-color: #1e90ff;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 18px;
+  padding: 0.5rem 1.5rem;
+
+  transition: 0.4s ease-in-out all;
+  width: fit-content;
+
+  &:hover {
+    background-color: hsl(210, 100%, 97%);
+    color: #1e90ff;
+    outline: 1px solid #1e90ff;
+  }
+}

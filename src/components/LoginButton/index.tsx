@@ -1,10 +1,12 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
+import styles from './style.module.scss';
 
 const LoginButton = () => {
   const { data: session } = useSession();
 
   return session?.user ? (
     <button
+      className={styles.logout}
       onClick={() => {
         signOut();
       }}
@@ -13,6 +15,7 @@ const LoginButton = () => {
     </button>
   ) : (
     <button
+      className={styles.login}
       onClick={() => {
         signIn();
       }}

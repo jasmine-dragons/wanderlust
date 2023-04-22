@@ -1,5 +1,6 @@
 export type Styles = {
   container: string;
+  content: string;
   header: string;
 };
 

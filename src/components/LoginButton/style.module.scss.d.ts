@@ -1,5 +1,6 @@
 export type Styles = {
-  button: string;
+  login: string;
+  logout: string;
 };
 
 export type ClassNames = keyof Styles;

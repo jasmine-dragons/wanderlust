@@ -16,7 +16,7 @@ const LoginPage: NextPage = () => {
   }, [session?.user]);
   return (
     <div className={styles.container}>
-      <div className="">
+      <div className={styles.content}>
         <h1 className={styles.header}>wanderlust.</h1>
         <LoginButton />
       </div>

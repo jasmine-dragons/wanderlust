@@ -1,14 +1,19 @@
 export type Styles = {
   container: string;
-  image: string;
+  discovery: string;
+  discoveryHeader: string;
+  discoverySubtitle: string;
   line: string;
+  logout: string;
   map: string;
   menu: string;
   mode: string;
   modes: string;
   recentItem: string;
   recentItemImage: string;
+  recentItems: string;
   recents: string;
+  search: string;
   sidebar: string;
   sidebarTitle: string;
 };
