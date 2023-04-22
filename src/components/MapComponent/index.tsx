@@ -7,12 +7,92 @@ import { Threebox } from 'threebox-plugin';
 
 declare var window: any;
 
-interface location {
+type Transform = { x: number; y: number; z: number };
+type ModelOptions = {
+  obj: string; // path to file
+  type: string; // probably "gltf"
+  scale: number;
+  units: string; // probably "meters"
+  anchor: string; // probably "center"
+  rotation: Transform; // default rotation
+  adjustment?: Transform;
+};
+
+type CompoundModelOptions = {
+  // the static "base" of a model
+  base: ModelOptions;
+  // the smaller, rotating "adornment" of a model
+  adornment: ModelOptions;
+};
+
+const models = {
+  food: {
+    adornment: {
+      obj: '/shiba/scene.gltf',
+      type: 'gltf',
+      scale: 25,
+      units: 'meters',
+      anchor: 'center',
+      rotation: { x: -90, y: 0, z: 180 },
+      adjustment: { x: 0, y: 0, z: 1.5 },
+    },
+    base: {
+      obj: '/shiba/scene.gltf',
+      type: 'gltf',
+      scale: 40,
+      units: 'meters',
+      anchor: 'center',
+      rotation: { x: -90, y: 0, z: 180 },
+    },
+  },
+} satisfies Record<string, CompoundModelOptions>;
+
+type ModelType = keyof typeof models;
+
+type MapLocation = { type: ModelType } & Location;
+
+function loadLocation(map: mapboxgl.Map, modelType: ModelType, location: Location) {
+  map.addLayer({
+    id: modelType,
+    type: 'custom',
+    renderingMode: '3d',
+    onAdd(_map, ctx) {
+      window.tb = new Threebox(_map, ctx, { defaultLights: true });
+      window.tb.loadObj(models[modelType].base, (obj: any) => {
+        const model = obj.setCoords([location.lat, location.lng]);
+        window.tb.add(model);
+        addAdornment();
+      });
+    },
+    render(gl, matrix) {
+      window.tb.update();
+    },
+  });
+
+  function addAdornment() {
+    window.tb.loadObj(models[modelType].adornment, (obj: any) => {
+      const model = obj.setCoords([location.lat, location.lng]);
+      window.tb.add(model);
+
+      // rotate adornment
+      let rotation = 0;
+      function animate() {
+        setTimeout(() => {
+          requestAnimationFrame(animate);
+        }, 1000 / 20); // rotate ~20 times/s
+        model.setRotation({ x: 0, y: 0, z: (rotation = (rotation - 10) % 360) });
+      }
+      animate();
+    });
+  }
+}
+
+interface Location {
   lat: number;
   lng: number;
 }
 
-const ucla: location = {
+const ucla: Location = {
   lng: 34.0689,
   lat: -118.4452,
 };
@@ -21,67 +101,24 @@ const MapComponent = () => {
   const mapRef = useRef<MapRef>(null);
   const token = process.env.NEXT_PUBLIC_MAP_TOKEN;
 
-  const addFood = (map: any, origin: any) => {
+  const addFood = (map: any, origin: Location) => {
     let model: any;
 
-    var options = {
-      obj: '/car.glb', //'/shiba/scene.gltf', // shiba url doesnt seem to work for some reason. maybe need to only use glb files(?)
-      type: 'gltf',
-      scale: 1.5,
-      units: 'meters',
-      anchor: 'center',
-      rotationTransform: 1,
-      adjustment: { x: 0, y: 0, z: 1.5 },
-      rotation: { x: 0, y: 0, z: 0 }, //default rotation
-    };
-
-    window.tb.loadObj(options, function (obj: any) {
-      model = obj.setCoords(origin);
+    window.tb.loadObj(models.food.adornment, function (obj: any) {
+      model = obj.setCoords([origin.lat, origin.lng]);
       window.tb.add(model);
 
       // comment out animation for now -
       // first needa figure out how to get this whole thing to work
-      //   let rotation = 0;
-      // //   function animate() {
-      // //     setTimeout(function () {
-      // //       requestAnimationFrame(animate);
-      // //     }, 1000 / 20);
-      // //     food.setRotation({ x: 0, y: 0, z: (rotation += 10) });
-      // //   }
+      let rotation = 0;
+      function animate() {
+        setTimeout(function () {
+          requestAnimationFrame(animate);
+        }, 1000 / 20);
+        model.setRotation({ x: 0, y: 0, z: (rotation += 10) });
+      }
 
-      // //   animate();
-    });
-  };
-
-  const loadLocations = (map: mapboxgl.Map) => {
-    let model;
-
-    console.log('loading locations');
-    map.addLayer({
-      id: 'food',
-      type: 'custom',
-      renderingMode: '3d',
-      onAdd: function (_map: any, ctx: any) {
-        window.tb = new Threebox(_map, ctx, { defaultLights: true });
-
-        let options = {
-          obj: '/car.glb', //'/shiba/scene.gtlf',
-          type: 'gltf',
-          scale: 40,
-          units: 'meters',
-          anchor: 'center',
-          rotation: { x: 90, y: 180, z: 0 },
-        };
-
-        window.tb.loadObj(options, (obj: any) => {
-          model = obj.setCoords([ucla.lat, ucla.lng]);
-          window.tb.add(model);
-          addFood(_map, [ucla.lat, ucla.lng]);
-        });
-      },
-      render: function (gl: any, matrix: any) {
-        window.tb.update();
-      },
+      animate();
     });
   };
 
@@ -93,7 +130,7 @@ const MapComponent = () => {
     }
     window.map = map;
     console.log('map load!');
-    loadLocations(map);
+    loadLocation(map, 'food', ucla);
   };
 
   return (
