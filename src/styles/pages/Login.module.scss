@@ -1,0 +1,11 @@
+.container {
+  display: grid;
+  height: 100vh;
+  place-items: center;
+  width: 100vw;
+
+  .header {
+    font-size: 3em;
+    font-weight: 700;
+  }
+}

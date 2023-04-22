@@ -3,6 +3,10 @@ const nextConfig = {
   eslint: {
     dirs: ['.'],
   },
+
+  images: {
+    domains: ['images.unsplash.com'],
+  },
   i18n: {
     locales: ['en'],
     defaultLocale: 'en',

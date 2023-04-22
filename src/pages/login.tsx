@@ -1,4 +1,5 @@
 import LoginButton from '@/components/LoginButton';
+import styles from '@/styles/pages/Login.module.scss';
 import { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -14,8 +15,11 @@ const LoginPage: NextPage = () => {
     }
   }, [session?.user]);
   return (
-    <div>
-      <LoginButton />
+    <div className={styles.container}>
+      <div className="">
+        <h1 className={styles.header}>wanderlust.</h1>
+        <LoginButton />
+      </div>
     </div>
   );
 };

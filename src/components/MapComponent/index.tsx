@@ -144,7 +144,7 @@ const MapComponent = () => {
         zoom: 14,
       }}
       projection="globe"
-      style={{ width: '90vw', height: '90vh' }}
+      style={{ width: '100%', height: '100%' }}
       mapStyle="mapbox://styles/mapbox/streets-v9"
     >
       <Marker longitude={ucla.lat} latitude={ucla.lng} anchor="bottom">
