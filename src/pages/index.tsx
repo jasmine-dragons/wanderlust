@@ -1,6 +1,6 @@
 import ItemCard from '@/components/ItemCard';
 import LoginButton from '@/components/LoginButton';
-import MapComponent from '@/components/MapComponent';
+import Map from '@/components/Map';
 import tiktoks from '@/lib/tiktoks.json';
 import { MapItemType, TiktokResponse } from '@/lib/types';
 import { shuffle } from '@/lib/utils';
@@ -333,7 +333,7 @@ const Home: NextPage = () => {
           ) : null}
         </section>
         <section className={styles.map}>
-          <MapComponent />
+          <Map markers={favorites} goTo={{ lat: 1, lng: 1 }} />
         </section>
       </div>
     </>
