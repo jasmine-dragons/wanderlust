@@ -94,6 +94,8 @@ const Home: NextPage = () => {
           location: search2,
         });
 
+        const listingTypes: string[] = ['food', 'entertainment', 'sightseeing'];
+
         const data = JSON.parse(yelp.data);
         const returnObject: MapItemType = {
           image: data.image_url,
@@ -109,7 +111,7 @@ const Home: NextPage = () => {
           phone: data.phone,
           displayAddress: data.location.display_address,
           categories: data.categories.map((item: { alias: string; title: string }) => item.title),
-          type: 'food',
+          type: listingTypes[Math.floor(Math.random() * listingTypes.length)] as string,
         };
 
         setDisplaySearchResults(current => [...current, returnObject]);

@@ -31,15 +31,16 @@ Title: Binoculars
 */
 
 import { useGLTF } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import React from 'react';
 
 export function Binoculars(props: any) {
   const { nodes, materials } = useGLTF('/binoculars-transformed.glb');
   const myMesh = React.useRef();
 
-  // useFrame(({ clock }) => {
-  //   myMesh.current.rotation.z = clock.getElapsedTime();
-  // });
+  useFrame(({ clock }) => {
+    myMesh.current.rotation.y = clock.getElapsedTime();
+  });
 
   return (
     <group {...props} ref={myMesh} dispose={null}>
@@ -67,9 +68,9 @@ export function Burger(props) {
   const { nodes, materials } = useGLTF('/burger-transformed.glb');
   const myMesh = React.useRef();
 
-  // useFrame(({ clock }) => {
-  //   myMesh.current.rotation.y = clock.getElapsedTime();
-  // });
+  useFrame(({ clock }) => {
+    myMesh.current.rotation.y = clock.getElapsedTime();
+  });
 
   return (
     <group {...props} ref={myMesh} dispose={null} scale={5} position={[0, 5, 0]}>
@@ -200,18 +201,16 @@ export function Microphone(props) {
   const { nodes, materials } = useGLTF('/microphone-transformed.glb');
   const myMesh = React.useRef();
 
-  // useFrame(({ clock }) => {
-  //   myMesh.current.rotation.x = clock.getElapsedTime();
-  //   myMesh.current.rotation.z = clock.getElapsedTime();
-  //   myMesh.current.rotation.y = clock.getElapsedTime();
-  // });
+  useFrame(({ clock }) => {
+    myMesh.current.rotation.y = clock.getElapsedTime();
+  });
   return (
     <group {...props} ref={myMesh} dispose={null} scale={0.015}>
       <mesh
         geometry={nodes.Cylinder_Material001_0.geometry}
         material={materials['Material.001']}
         position={[0, 14.34, 0]}
-        rotation={[-Math.PI / 2, 0, 0]}
+        rotation={[-Math.PI / 2, -0.25, 0]}
         scale={12.47}
       />
     </group>
