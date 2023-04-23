@@ -5,6 +5,7 @@ import { SessionProvider } from 'next-auth/react';
 
 import { DM_Sans as DMSans } from 'next/font/google';
 
+import SEO from '@/components/SEO';
 import type { AppProps } from 'next/app';
 
 const dmSans = DMSans({ subsets: ['latin'], weight: ['400', '500', '700'] });
@@ -12,6 +13,7 @@ const dmSans = DMSans({ subsets: ['latin'], weight: ['400', '500', '700'] });
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+      <SEO />
       <style jsx global>{`
         * {
           font-family: ${dmSans.style.fontFamily}, sans-serif;
