@@ -45,7 +45,6 @@ const Home: NextPage = () => {
       `
       )}
     `;
-    console.log({ prompt });
     const res = await axios.post('/api/cohere', {
       prompt,
     });
@@ -268,11 +267,8 @@ const Home: NextPage = () => {
                   <ItemCard
                     key={item.id}
                     favorite={() => {
-                      // Chcek if item is in list already
                       const index = favorites.findIndex(elem => elem.id === item.id);
 
-                      // If not, add
-                      console.log(index);
                       if (index === -1) {
                         setFavorites(current => [...current, item]);
                       } else {
@@ -297,11 +293,7 @@ const Home: NextPage = () => {
                 <ItemCard
                   key={item.id}
                   favorite={() => {
-                    // Chcek if item is in list already
                     const index = favorites.findIndex(elem => elem.id === item.id);
-
-                    // If not, add
-                    console.log(index);
                     if (index === -1) {
                       setFavorites(current => [...current, item]);
                     } else {
