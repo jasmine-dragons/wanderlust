@@ -4,6 +4,7 @@ export type Styles = {
   content: string;
   cover: string;
   divider: string;
+  expand: string;
   favorite: string;
   links: string;
   row: string;

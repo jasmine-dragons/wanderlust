@@ -19,6 +19,7 @@
   flex-direction: column;
   gap: 1.5rem;
   padding: 1rem;
+  position: relative;
   transition: 0.15s ease-in-out all;
   width: 100%;
 
@@ -79,6 +80,19 @@
       background-color: #6c6c6c;
       height: 1px;
       margin: 8px 0;
+    }
+
+    .expand {
+      background-color: #b4b4b4;
+      border-radius: 1rem;
+      display: grid;
+      height: 2rem;
+      padding: 0;
+      place-items: center;
+      position: absolute;
+      right: 0.5rem;
+      top: 0.5rem;
+      width: 2rem;
     }
 
     .tiktokViews {

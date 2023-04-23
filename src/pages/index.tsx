@@ -244,6 +244,7 @@ const Home: NextPage = () => {
               ) : (
                 displaySearchResults.map(item => (
                   <ItemCard
+                    small={false}
                     key={item.id}
                     favorite={() => {
                       const index = favorites.findIndex(elem => elem.id === item.id);
@@ -268,8 +269,9 @@ const Home: NextPage = () => {
           {viewMode === 'saved' ? (
             <div className={styles.saved}>
               <h3 className={styles.savedHeader}>Saved Locations</h3>
-              {favorites.map(item => (
+              {favorites.map((item, index) => (
                 <ItemCard
+                  small={favorites.length !== 1}
                   key={item.id}
                   favorite={() => {
                     const index = favorites.findIndex(elem => elem.id === item.id);
