@@ -41,7 +41,7 @@ const MapComponent = (props: IProps) => {
         pitch: 75,
       }}
       maxZoom={18}
-      minZoom={12}
+      minZoom={10}
       projection="globe"
       style={{ width: '100%', height: '100%' }}
       mapStyle="mapbox://styles/nishantbalaji/clgsr9lyg001301q12ajhb47e"

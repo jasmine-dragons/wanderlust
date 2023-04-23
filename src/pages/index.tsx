@@ -88,7 +88,6 @@ const Home: NextPage = () => {
           categories: data.categories.map((item: { alias: string; title: string }) => item.title),
           type: 'food',
         };
-        addToHistory(returnObject);
         setDisplaySearchResults(current => [...current, returnObject]);
         setLoading(false);
       } catch (err: any) {}
@@ -182,7 +181,13 @@ const Home: NextPage = () => {
             <h6>History</h6>
             <div className={styles.recentItems}>
               {history.slice(0, 3).map(item => (
-                <button key={item.id} className={styles.recentItem}>
+                <button
+                  onClick={() =>
+                    setGoTo({ lat: item.coordinates.latitude, lng: item.coordinates.longitude })
+                  }
+                  key={item.id}
+                  className={styles.recentItem}
+                >
                   <img
                     src={item.image}
                     alt="Item Image"
@@ -252,9 +257,13 @@ const Home: NextPage = () => {
               ) : (
                 displaySearchResults.map(item => (
                   <ItemCard
-                    handleMapPreview={() =>
-                      setGoTo({ lat: item.coordinates.latitude, lng: item.coordinates.longitude })
-                    }
+                    handleMapPreview={() => {
+                      setGoTo({
+                        lat: item.coordinates.latitude,
+                        lng: item.coordinates.longitude,
+                      });
+                      addToHistory(item);
+                    }}
                     small={false}
                     key={item.id}
                     favorite={() => {
@@ -282,8 +291,12 @@ const Home: NextPage = () => {
               <h3 className={styles.savedHeader}>Saved Locations</h3>
               {favorites.map(item => (
                 <ItemCard
-                  handleMapPreview={function (): void {
-                    throw new Error('Function not implemented.');
+                  handleMapPreview={() => {
+                    setGoTo({
+                      lat: item.coordinates.latitude,
+                      lng: item.coordinates.longitude,
+                    });
+                    addToHistory(item);
                   }}
                   small={favorites.length !== 1}
                   key={item.id}
