@@ -1,4 +1,5 @@
 export type Styles = {
+  appear: string;
   container: string;
   discovery: string;
   discoveryHeader: string;
