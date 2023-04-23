@@ -35,7 +35,23 @@ const Home: NextPage = () => {
   const [viewMode, setViewMode] = useState<'discover' | 'saved' | 'itinerary'>('discover');
   const [displaySearchResults, setDisplaySearchResults] = useState<MapItemType[]>([]);
   const [favorites, setFavorites] = useState<MapItemType[]>([]);
+  const [itineraryResponse, setItineraryResponse] = useState();
+  const [listSelection, setListSelection] = useState<{ [key: string]: boolean }>({});
 
+  const fetchCohere = async (list: string[]) => {
+    const prompt = `create an itinerary for my day in Los Angeles including all of the following locations in whichever order makes the most sense:
+      ${list.map(
+        item => `- ${item}
+      `
+      )}
+    `;
+    console.log({ prompt });
+    const res = await axios.post('/api/cohere', {
+      prompt,
+    });
+
+    setItineraryResponse(res.data[0]);
+  };
   // const [flyTo, setFlyTo] = useState(null);
 
   const generateDisplayResults = async (popularVideos: TiktokResponse[]) => {
@@ -304,9 +320,40 @@ const Home: NextPage = () => {
           ) : null}
           {viewMode === 'itinerary' ? (
             <>
-              <h1>itinerary</h1>
+              <h1>Create Your Perfect Daily Itinerary</h1>
+              {favorites.map(item => (
+                <div key={item.id}>
+                  <input
+                    type="checkbox"
+                    name={item.id}
+                    checked={listSelection[item.id] === true}
+                    onChange={() => {
+                      setListSelection(curr => {
+                        const clone = { ...curr };
+                        const state = clone[item.id];
+                        clone[item.id] = !state;
+                        return clone;
+                      });
+                    }}
+                  />
+                  <label id={item.id} htmlFor={item.id}>
+                    {item.name}
+                  </label>
+                </div>
+              ))}
             </>
           ) : null}
+          <button
+            onClick={() => {
+              const on = Object.entries(listSelection)
+                .filter(([_, v]) => v === true)
+                .map(([k, _]) => document.getElementById(k)?.innerText) as string[];
+              fetchCohere(on);
+            }}
+          >
+            Generate
+          </button>
+          <p className={styles.itineraryResponse}>{itineraryResponse}</p>
         </section>
         <section className={styles.map}>
           <MapComponent />

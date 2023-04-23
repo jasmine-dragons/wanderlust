@@ -3,6 +3,7 @@ export type Styles = {
   discovery: string;
   discoveryHeader: string;
   discoverySubtitle: string;
+  itineraryResponse: string;
   line: string;
   logout: string;
   map: string;
