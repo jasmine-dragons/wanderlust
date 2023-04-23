@@ -11,10 +11,11 @@ import { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { useEffect, useRef, useState } from 'react';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { FaRegCompass } from 'react-icons/fa';
-import { HiOutlineNewspaper } from 'react-icons/hi';
+import { MdOutlineCalendarMonth } from 'react-icons/md';
+import LoadingIcons from 'react-loading-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,7 +24,7 @@ const fetchPopularTiktoksForTerm = (_: string, __: string) => {
   return tiktoks;
 };
 
-const BLUE = '#62b0ff';
+const PURPLE = '#c8a0d8';
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
@@ -62,21 +63,45 @@ const Home: NextPage = () => {
           displayAddress: data.location.display_address,
           categories: data.categories.map((item: { alias: string; title: string }) => item.title),
         };
-        console.log(data);
         setDisplaySearchResults(current => [...current, returnObject]);
+        setLoading(false);
       } catch (err: any) {}
     }
   };
 
   useEffect(() => {
-    if (!session?.user) {
-      router.push('/login');
-    }
+    if (!session?.user) router.push('/login');
   }, [session?.user]);
 
   useEffect(() => {
-    console.log({ favorites });
+    const stored = localStorage.getItem('favorites');
+    setFavorites(stored ? JSON.parse(stored) : '[]');
+  }, []);
+
+  const firstRun = useRef(true);
+
+  useEffect(() => {
+    if (firstRun.current) {
+      firstRun.current = false;
+      return;
+    }
+    localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
+
+  const searchDiscover = async () => {
+    if (!search1 || !search2) {
+      toast('Please enter a search query to continue');
+      return;
+    }
+    setLoading(true);
+
+    const popularVideos: TiktokResponse[] = shuffle(
+      fetchPopularTiktoksForTerm(search1, search2)
+    ).slice(0, 5);
+
+    await generateDisplayResults(popularVideos);
+  };
+
   return (
     <>
       <ToastContainer />
@@ -85,30 +110,37 @@ const Home: NextPage = () => {
           <h6 className={styles.sidebarTitle}>wanderlust.</h6>
           <div className={styles.modes}>
             <button onClick={() => setViewMode('discover')} className={styles.mode}>
-              <FaRegCompass size={24} color={viewMode === 'discover' ? BLUE : 'black'} />
+              <FaRegCompass size={24} color={viewMode === 'discover' ? PURPLE : 'black'} />
               <span
                 style={{
-                  color: viewMode === 'discover' ? BLUE : 'black',
+                  color: viewMode === 'discover' ? PURPLE : 'black',
                 }}
               >
                 Discover
               </span>
             </button>
             <button onClick={() => setViewMode('saved')} className={styles.mode}>
-              <AiOutlineHeart size={24} color={viewMode === 'saved' ? BLUE : 'black'} />
+              {viewMode === 'saved' ? (
+                <AiFillHeart size={24} color={PURPLE} />
+              ) : (
+                <AiOutlineHeart size={24} color={'black'} />
+              )}
               <span
                 style={{
-                  color: viewMode === 'saved' ? BLUE : 'black',
+                  color: viewMode === 'saved' ? PURPLE : 'black',
                 }}
               >
-                Saved
+                Likes
               </span>
             </button>
             <button onClick={() => setViewMode('itinerary')} className={styles.mode}>
-              <HiOutlineNewspaper size={24} color={viewMode === 'itinerary' ? BLUE : 'black'} />
+              <MdOutlineCalendarMonth
+                size={24}
+                color={viewMode === 'itinerary' ? PURPLE : 'black'}
+              />
               <span
                 style={{
-                  color: viewMode === 'itinerary' ? BLUE : 'black',
+                  color: viewMode === 'itinerary' ? PURPLE : 'black',
                 }}
               >
                 Itinerary
@@ -172,20 +204,7 @@ const Home: NextPage = () => {
               className={styles.discovery}
               onKeyDown={e => {
                 if (e.key === 'Enter') {
-                  (() => {
-                    if (!search1 || !search2) {
-                      toast('Please enter a search query to continue');
-                      return;
-                    }
-                    setLoading(true);
-
-                    const popularVideos: TiktokResponse[] = shuffle(
-                      fetchPopularTiktoksForTerm(search1, search2)
-                    ).slice(0, 5);
-
-                    generateDisplayResults(popularVideos);
-                    setLoading(false);
-                  })();
+                  searchDiscover();
                 }
               }}
             >
@@ -204,28 +223,30 @@ const Home: NextPage = () => {
                   value={search2}
                   onChange={e => setSearch2(e.target.value)}
                 />
-                <button
-                  onClick={() => {
-                    if (!search1 || !search2) {
-                      toast('Please enter a search query to continue');
-                      return;
-                    }
-                    setLoading(true);
-
-                    const popularVideos: TiktokResponse[] = fetchPopularTiktoksForTerm(
-                      search1,
-                      search2
-                    ).slice(0, 5);
-                    // TODO: Randomize results
-                    generateDisplayResults(popularVideos);
-                    setLoading(false);
-                  }}
-                >
-                  Search
-                </button>
+                <button onClick={() => searchDiscover()}>Search</button>
               </div>
               {loading ? (
-                <span>Loading</span>
+                <div
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'grid',
+                    placeItems: 'center',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '1rem',
+                    }}
+                  >
+                    <LoadingIcons.Puff stroke="#c8a0d8" strokeOpacity={0.75} />
+                    <h1>Thank you for your patience!</h1>
+                    <h1> ଘ(੭ˊᵕˋ)੭* ੈ✩‧˚</h1>
+                  </div>
+                </div>
               ) : (
                 displaySearchResults.map(item => (
                   <ItemCard

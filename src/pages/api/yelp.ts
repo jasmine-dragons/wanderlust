@@ -2,8 +2,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 const yelp = require('yelp-fusion');
 
-const apiKey =
-  'bw4T14RxsIYD8I_GEHOQF6LgLYPcAUokJC61WvJPIkwLLbWYdVsyTJMTcuE2XFlK0BLds-KBXbeAczCnjuYKrrpjE23nTsKSi76kWKbt51tsBx1vxFql5cpAlsBDZHYx';
+const apiKey = process.env.YELP_KEY;
 
 type Data = any;
 const client = yelp.client(apiKey);

@@ -159,6 +159,7 @@ const MapComponent = () => {
         longitude: ucla.lat,
         latitude: ucla.lng,
         zoom: 14,
+        pitch: 75,
       }}
       // maxZoom={18}
       // minZoom={12}
