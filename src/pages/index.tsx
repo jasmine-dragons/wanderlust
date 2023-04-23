@@ -224,6 +224,10 @@ const Home: NextPage = () => {
               }}
             >
               <h3 className={styles.discoveryHeader}>Discover Nearby</h3>
+              <h6 className={styles.subheading}>
+                Search for the next trendy restaurant or new activities. Like the places that you
+                want to visit to save them for the next time you are in the area!
+              </h6>
               <div className={styles.search}>
                 <input
                   type="text"
@@ -296,6 +300,10 @@ const Home: NextPage = () => {
           {viewMode === 'saved' ? (
             <div className={styles.saved}>
               <h3 className={styles.savedHeader}>Saved Locations</h3>
+              <h6 className={styles.subheading}>
+                A list of your liked locations for you to use when building a travel itinerary in
+                any city.
+              </h6>
               {favorites.map(item => (
                 <ItemCard
                   handleMapPreview={() => {
@@ -328,6 +336,14 @@ const Home: NextPage = () => {
           {viewMode === 'itinerary' ? (
             <div className={styles.itinerary}>
               <h3 className={styles.header}>Create an AI-powered itinerary.</h3>
+              <h6 className={styles.subheading}>
+                Build a custom itinerary out of your liked locations! If you want more options, go
+                to the{' '}
+                <button className={styles.discoverLink} onClick={() => setViewMode('discover')}>
+                  Discover page{' '}
+                </button>
+                and like more locations in the area!
+              </h6>
               <div className={styles.carousel}>
                 {itineraryPrompt.map(item => (
                   <ItineraryCard
@@ -393,7 +409,7 @@ const Home: NextPage = () => {
           ) : null}
         </section>
         <section className={styles.map}>
-          <Map markers={displaySearchResults} goTo={goTo} />
+          <Map markers={displaySearchResults} goTo={goTo} favorites={favorites} />
         </section>
       </div>
     </>

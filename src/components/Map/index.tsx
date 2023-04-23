@@ -1,8 +1,10 @@
 import { GeoLocation, MapItemType } from '@/lib/types';
+import HeartPin from '@/public/heartpin.png';
 import Pin from '@/public/pin.png';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import Map, { GeolocateControl, MapRef, Marker, NavigationControl } from 'react-map-gl';
+import styles from './style.module.scss';
 
 declare var window: any;
 
@@ -14,9 +16,11 @@ const ucla: GeoLocation = {
 interface IProps {
   markers: MapItemType[];
   goTo: GeoLocation | null;
+  favorites: MapItemType[];
 }
+
 const MapComponent = (props: IProps) => {
-  const { markers, goTo } = props;
+  const { markers, goTo, favorites } = props;
 
   const mapRef = useRef<MapRef>(null);
 
@@ -48,13 +52,12 @@ const MapComponent = (props: IProps) => {
     >
       {markers.map((item: MapItemType, i: number) => (
         <Marker key={i} {...item.coordinates}>
-          {/* <button
-            onClick={() => {
-              console.log({ item });
-            }}
-          > */}
-          <Image src={Pin} width={48} height={48} alt="pin" />
-          {/* </button> */}
+          <Image src={Pin} width={48} height={48} alt="pin" className={styles.pin} />
+        </Marker>
+      ))}
+      {favorites.map((item: MapItemType, i: number) => (
+        <Marker key={i} {...item.coordinates}>
+          <Image src={HeartPin} width={36} height={48} alt="pin" className={styles.pin} />
         </Marker>
       ))}
       <NavigationControl position="bottom-right" visualizePitch={true} />

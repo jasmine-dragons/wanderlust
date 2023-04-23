@@ -2,6 +2,7 @@ export type Styles = {
   appear: string;
   carousel: string;
   container: string;
+  discoverLink: string;
   discovery: string;
   discoveryHeader: string;
   discoverySubtitle: string;
@@ -23,6 +24,7 @@ export type Styles = {
   search: string;
   sidebar: string;
   sidebarTitle: string;
+  subheading: string;
 };
 
 export type ClassNames = keyof Styles;
