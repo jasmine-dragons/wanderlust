@@ -99,13 +99,13 @@
     "name": "museum of love",
     "impressions": 27500,
     "video": "https://www.tiktok.com/t/ZTRTDuyCh/",
-    "type": "food"
+    "type": "entertainment"
   },
   {
     "name": "duff’s cake mix",
     "impressions": 26200,
     "video": "https://www.tiktok.com/t/ZTRTDmAuF/",
-    "type": "food"
+    "type": "entertainment"
   },
   {
     "name": "hammer museum",
@@ -171,7 +171,7 @@
     "name": "auragami",
     "impressions": 7631,
     "video": "https://www.tiktok.com/t/ZTRTD6sXW/",
-    "type": "food"
+    "type": "entertainment"
   },
   {
     "name": "eggtuck",
@@ -213,7 +213,7 @@
     "name": "sender one",
     "impressions": 5375,
     "video": "https://www.tiktok.com/t/ZTRTDML5n/",
-    "type": "food"
+    "type": "entertainment"
   },
   {
     "name": "Two Hands",
@@ -267,7 +267,7 @@
     "name": "the line",
     "impressions": 3045,
     "video": "https://www.tiktok.com/t/ZTRTDBqst/",
-    "type": "entertainment"
+    "type": "sightseeing"
   },
   {
     "name": "The Red Chickz",
@@ -285,7 +285,7 @@
     "name": "lake shrine",
     "impressions": 2717,
     "video": "https://www.tiktok.com/t/ZTRTDDBDg/",
-    "type": "entertainment"
+    "type": "sightseeing"
   },
   {
     "name": "mr brainwash museum",
@@ -321,7 +321,7 @@
     "name": "line hotel",
     "impressions": 1695,
     "video": "https://www.tiktok.com/t/ZTRTDyoGe/",
-    "type": "entertainment"
+    "type": "sightseeing"
   },
   {
     "name": "escape hotel",
@@ -357,7 +357,7 @@
     "name": "citizen m",
     "impressions": 1401,
     "video": "https://www.tiktok.com/t/ZTRTDXRCx/",
-    "type": "food"
+    "type": "sightseeing"
   },
   {
     "name": "rage ground",
@@ -375,7 +375,7 @@
     "name": "dover street market",
     "impressions": 1170,
     "video": "https://www.tiktok.com/t/ZTRTD9cdJ/",
-    "type": "food"
+    "type": "sightseeing"
   },
   {
     "name": "louis 200 exhibit",
@@ -477,7 +477,7 @@
     "name": "dreamscape",
     "impressions": 192,
     "video": "https://www.tiktok.com/t/ZTRTDatYP/",
-    "type": "food"
+    "type": "entertainment"
   },
   {
     "name": "uovo",
@@ -489,7 +489,7 @@
     "name": "ipic theater",
     "impressions": 179,
     "video": "https://www.tiktok.com/t/ZTRTD2Qnj/",
-    "type": "food"
+    "type": "entertainment"
   },
   {
     "name": "butcher’s daughter",
@@ -567,126 +567,150 @@
     "name": "bob marley experience",
     "impressions": 52,
     "video": "https://www.tiktok.com/t/ZTRTD9qsT/",
-    "type": "food"
+    "type": "entertainment"
   },
   {
     "name": "violet bistro",
     "impressions": 50,
-    "video": "https://www.tiktok.com/t/ZTRTD8uTa/"
+    "video": "https://www.tiktok.com/t/ZTRTD8uTa/",
+    "type": "food"
   },
   {
     "name": "westwood farmers market",
     "impressions": 48,
-    "video": "https://www.tiktok.com/t/ZTRTAwdr6/"
+    "video": "https://www.tiktok.com/t/ZTRTAwdr6/",
+    "type": "food"
   },
   {
     "name": "Broxton",
     "impressions": 47,
-    "video": "https://www.tiktok.com/t/ZTRTD24MA/"
+    "video": "https://www.tiktok.com/t/ZTRTD24MA/",
+    "type": "food"
   },
   {
     "name": "the lazy daisy cafe",
     "impressions": 43,
-    "video": "https://www.tiktok.com/t/ZTRTD8H3k/"
+    "video": "https://www.tiktok.com/t/ZTRTD8H3k/",
+    "type": "food"
   },
   {
     "name": "Comoncy",
     "impressions": 42,
-    "video": "https://www.tiktok.com/t/ZTRTAKn1k/"
+    "video": "https://www.tiktok.com/t/ZTRTAKn1k/",
+    "type": "food"
   },
   {
     "name": "wi spa",
     "impressions": 39,
-    "video": "https://www.tiktok.com/t/ZTRTDasv4/"
+    "video": "https://www.tiktok.com/t/ZTRTDasv4/",
+    "type": "entertainment"
   },
   {
     "name": "natural history museum of la",
     "impressions": 39,
-    "video": "https://www.tiktok.com/t/ZTRTDXFjP/"
+    "video": "https://www.tiktok.com/t/ZTRTDXFjP/",
+    "type": "entertainment"
   },
   {
     "name": "Kazunori",
     "impressions": 35,
-    "video": "https://www.tiktok.com/t/ZTRTAGxnf/"
+    "video": "https://www.tiktok.com/t/ZTRTAGxnf/",
+    "type": "food"
   },
   {
     "name": "stk",
     "impressions": 35,
-    "video": "https://www.tiktok.com/t/ZTRTD1E7r/"
+    "video": "https://www.tiktok.com/t/ZTRTD1E7r/",
+    "type": "food"
   },
   {
     "name": "attari",
     "impressions": 34,
-    "video": "https://www.tiktok.com/t/ZTRTDNuqW/"
+    "video": "https://www.tiktok.com/t/ZTRTDNuqW/",
+    "type": "food"
   },
   {
     "name": "espressoteric",
     "impressions": 32,
-    "video": "https://www.tiktok.com/t/ZTRTAWwV6/"
+    "video": "https://www.tiktok.com/t/ZTRTAWwV6/",
+    "type": "food"
   },
   {
     "name": "tulsi",
     "impressions": 30,
-    "video": "https://www.tiktok.com/t/ZTRTAW77w/"
+    "video": "https://www.tiktok.com/t/ZTRTAW77w/",
+    "type": "food"
   },
   {
     "name": "the boiling crab",
     "impressions": 25,
-    "video": "https://www.tiktok.com/t/ZTRTDdARw/"
+    "video": "https://www.tiktok.com/t/ZTRTDdARw/",
+    "type": "food"
   },
   {
     "name": "the boiling crab",
     "impressions": 20,
-    "video": "https://www.tiktok.com/t/ZTRTDJskg/"
+    "video": "https://www.tiktok.com/t/ZTRTDJskg/",
+    "type": "food"
   },
   {
     "name": "lulu at hammer museum",
     "impressions": 20,
-    "video": "https://www.tiktok.com/t/ZTRTAKnQL/"
+    "video": "https://www.tiktok.com/t/ZTRTAKnQL/",
+    "type": "food"
   },
   {
     "name": "california fresh",
     "impressions": 20,
-    "video": "https://www.tiktok.com/t/ZTRTAonSX/"
+    "video": "https://www.tiktok.com/t/ZTRTAonSX/",
+    "type": "food"
   },
   {
     "name": "pooka’s eats",
     "impressions": 19,
-    "video": "https://www.tiktok.com/t/ZTRTD1QMG/"
+    "video": "https://www.tiktok.com/t/ZTRTD1QMG/",
+    "type": "food"
   },
   {
     "name": "olivetta",
     "impressions": 18,
-    "video": "https://www.tiktok.com/t/ZTRTD8Kec/"
+    "video": "https://www.tiktok.com/t/ZTRTD8Kec/",
+    "type": "food"
   },
   {
     "name": "fellow",
     "impressions": 13,
-    "video": "https://www.tiktok.com/t/ZTRTD85EP/"
+    "video": "https://www.tiktok.com/t/ZTRTD85EP/",
+    "type": "food"
   },
   {
     "name": "shin-sen-gumi",
     "impressions": 11,
-    "video": "https://www.tiktok.com/t/ZTRTAtxf3/"
+    "video": "https://www.tiktok.com/t/ZTRTAtxf3/",
+    "type": "food"
   },
   {
     "name": "eggtuck",
     "impressions": 10,
-    "video": "https://www.tiktok.com/t/ZTRTDNKEq/"
+    "video": "https://www.tiktok.com/t/ZTRTDNKEq/",
+    "type": "food"
   },
   {
     "name": "lulu at hammer museum",
     "impressions": 8,
-    "video": "https://www.tiktok.com/t/ZTRTDd2kb/"
+    "video": "https://www.tiktok.com/t/ZTRTDd2kb/",
+    "type": "food"
   },
   {
     "name": "fellow",
     "impressions": 7,
-    "video": "https://www.tiktok.com/t/ZTRTAGQjw/"
+    "video": "https://www.tiktok.com/t/ZTRTAGQjw/",
+    "type": "food"
   },
   {
     "name": "Kazunori",
     "impressions": 2,
-    "video": "https://www.tiktok.com/t/ZTRTDN7EE/"
+    "video": "https://www.tiktok.com/t/ZTRTDN7EE/",
+    "type": "food"
   }
 ]

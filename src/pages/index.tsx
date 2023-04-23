@@ -56,7 +56,7 @@ const Home: NextPage = () => {
   const fetchCohere = async (list: string[]) => {
     const prompt = `create an itinerary for my day in Los Angeles including all of the following locations in whichever order makes the most sense:
       ${list.map(
-        item => `- ${item}
+        item => `\n - ${item}
       `
       )}
     `;
