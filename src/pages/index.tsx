@@ -37,6 +37,7 @@ const Home: NextPage = () => {
   const [favorites, setFavorites] = useState<MapItemType[]>([]);
   const [itineraryResponse, setItineraryResponse] = useState();
   const [listSelection, setListSelection] = useState<{ [key: string]: boolean }>({});
+  const [history, setHistory] = useState<MapItemType[]>([]);
 
   const fetchCohere = async (list: string[]) => {
     const prompt = `create an itinerary for my day in Los Angeles including all of the following locations in whichever order makes the most sense:
@@ -51,6 +52,11 @@ const Home: NextPage = () => {
 
     setItineraryResponse(res.data[0]);
   };
+
+  const addToHistory = (item: MapItemType) => {
+    setHistory(curr => [item, ...curr]);
+  };
+
   // const [flyTo, setFlyTo] = useState(null);
 
   const generateDisplayResults = async (popularVideos: TiktokResponse[]) => {
@@ -78,6 +84,7 @@ const Home: NextPage = () => {
           displayAddress: data.location.display_address,
           categories: data.categories.map((item: { alias: string; title: string }) => item.title),
         };
+        addToHistory(returnObject);
         setDisplaySearchResults(current => [...current, returnObject]);
         setLoading(false);
       } catch (err: any) {}
@@ -166,46 +173,18 @@ const Home: NextPage = () => {
           <div className={styles.recents}>
             <h6>History</h6>
             <div className={styles.recentItems}>
-              <button className={styles.recentItem}>
-                <Image
-                  src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
-                  alt="Item Image"
-                  width={24}
-                  height={24}
-                  className={styles.recentItemImage}
-                />
-                <span>Marty's Pizza Parlor</span>
-              </button>
-              <button className={styles.recentItem}>
-                <Image
-                  src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
-                  alt="Item Image"
-                  width={24}
-                  height={24}
-                  className={styles.recentItemImage}
-                />
-                <span>Marty's Pizza Parlor</span>
-              </button>
-              <button className={styles.recentItem}>
-                <Image
-                  src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
-                  alt="Item Image"
-                  width={24}
-                  height={24}
-                  className={styles.recentItemImage}
-                />
-                <span>Marty's Pizza Parlor</span>
-              </button>
-              <button className={styles.recentItem}>
-                <Image
-                  src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
-                  alt="Item Image"
-                  width={24}
-                  height={24}
-                  className={styles.recentItemImage}
-                />
-                <span>Marty's Pizza Parlor</span>
-              </button>
+              {history.slice(0, 4).map(item => (
+                <button key={item.id} className={styles.recentItem}>
+                  <img
+                    src={item.image}
+                    alt="Item Image"
+                    width={24}
+                    height={24}
+                    className={styles.recentItemImage}
+                  />
+                  <span>{item.name}</span>
+                </button>
+              ))}
             </div>
           </div>
           <div className={styles.logout}>
@@ -270,7 +249,7 @@ const Home: NextPage = () => {
                       const index = favorites.findIndex(elem => elem.id === item.id);
 
                       if (index === -1) {
-                        setFavorites(current => [...current, item]);
+                        setFavorites(current => [item, ...current]);
                       } else {
                         setFavorites(current => {
                           const copy = [...current];

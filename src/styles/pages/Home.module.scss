@@ -66,6 +66,18 @@
         font-size: 12px;
       }
 
+      @keyframes appear {
+        from {
+          opacity: 0;
+          scale: 0;
+        }
+
+        to {
+          opacity: 1;
+          scale: 1;
+        }
+      }
+
       .recentItems {
         display: flex;
         flex-direction: column;
@@ -73,6 +85,7 @@
 
         .recentItem {
           align-items: center;
+          animation: appear 0.3s;
           background-color: #0000;
           cursor: pointer;
           display: flex;
