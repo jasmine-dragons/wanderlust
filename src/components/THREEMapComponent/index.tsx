@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import Map, { GeolocateControl, MapRef, Marker, NavigationControl } from 'react-map-gl';
 import { Threebox } from 'threebox-plugin';
 
-declare var window: any;
+declare let window: any;
 
 type Transform = { x: number; y: number; z: number };
 type ModelOptions = {
@@ -209,9 +209,9 @@ const THREEMapComponent = (props: IProps) => {
           <Binoculars />
         </Canvas>
       </Marker>
-      <NavigationControl position="bottom-right" visualizePitch={true} />
+      <NavigationControl position="bottom-right" visualizePitch />
       <GeolocateControl
-        trackUserLocation={true}
+        trackUserLocation
         showUserHeading={false}
         showAccuracyCircle={false}
         position="bottom-right"
