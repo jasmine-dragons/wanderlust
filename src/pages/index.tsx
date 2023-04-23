@@ -135,6 +135,14 @@ const Home: NextPage = () => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
+  useEffect(() => {
+    setDisplaySearchResults(finalItinerary);
+  }, [finalItinerary]);
+
+  useEffect(() => {
+    setDisplaySearchResults([]);
+    setFinalItinerary([]);
+  }, [viewMode]);
   const searchDiscover = async () => {
     if (!search1 || !search2) {
       toast('Please enter a search query to continue');
