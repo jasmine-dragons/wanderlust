@@ -1,3 +1,6 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import ItemCard from '@/components/ItemCard';
 import ItineraryCard from '@/components/ItineraryCard';
 import LoginButton from '@/components/LoginButton';
@@ -20,6 +23,7 @@ import { MdOutlineCalendarMonth } from 'react-icons/md';
 import LoadingIcons from 'react-loading-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 const fetchPopularTiktoksForTerm = (_: string, __: string) => {
   // axios.get('tiktok.com').then().catch();
   return tiktoks;
@@ -37,13 +41,11 @@ const Home: NextPage = () => {
   const [displaySearchResults, setDisplaySearchResults] = useState<MapItemType[]>([]);
   const [favorites, setFavorites] = useState<MapItemType[]>([]);
   const [itineraryResponse, setItineraryResponse] = useState<string>();
-  const [listSelection, setListSelection] = useState<{ [key: string]: boolean }>({});
   const [history, setHistory] = useState<MapItemType[]>([]);
   const [goTo, setGoTo] = useState<GeoLocation | null>(null);
   const [finalItinerary, setFinalItinerary] = useState<MapItemType[]>([]);
   const [itineraryPrompt, setItineraryPrompt] = useState<MapItemType[]>([]);
 
-  useEffect(() => console.log({ finalItinerary }), [finalItinerary]);
   useEffect(() => {
     setItineraryPrompt(favorites);
   }, [favorites]);
@@ -63,7 +65,17 @@ const Home: NextPage = () => {
   };
 
   const addToHistory = (item: MapItemType) => {
-    setHistory(curr => [item, ...curr]);
+    const index = history.findIndex(e => e.id === item.id);
+    if (index !== -1) {
+      setHistory(history => {
+        const clone = [...history];
+        clone.splice(index, 1);
+
+        return [item, ...clone];
+      });
+    } else {
+      setHistory(curr => [item, ...curr]);
+    }
   };
 
   // const [flyTo, setFlyTo] = useState(null);
@@ -96,13 +108,15 @@ const Home: NextPage = () => {
         };
         setDisplaySearchResults(current => [...current, returnObject]);
         setLoading(false);
-      } catch (err: any) {}
+      } catch (err: any) {
+        // avoid
+      }
     }
   };
 
   useEffect(() => {
     if (!session?.user) router.push('/login');
-  }, [session?.user]);
+  }, [router, session?.user]);
 
   useEffect(() => {
     const stored = localStorage.getItem('favorites');
@@ -141,7 +155,7 @@ const Home: NextPage = () => {
           <Image src={Logo} alt="Website Logo" width={48} height={64} />
           <h1 className={styles.sidebarTitle}>wanderlust</h1>
           <div className={styles.modes}>
-            <button onClick={() => setViewMode('discover')} className={styles.mode}>
+            <button type="button" onClick={() => setViewMode('discover')} className={styles.mode}>
               <FaRegCompass size={24} color={viewMode === 'discover' ? PURPLE : 'black'} />
               <span
                 style={{
@@ -152,11 +166,11 @@ const Home: NextPage = () => {
                 Discover
               </span>
             </button>
-            <button onClick={() => setViewMode('saved')} className={styles.mode}>
+            <button type="button" onClick={() => setViewMode('saved')} className={styles.mode}>
               {viewMode === 'saved' ? (
                 <AiFillHeart size={24} color={PURPLE} />
               ) : (
-                <AiOutlineHeart size={24} color={'black'} />
+                <AiOutlineHeart size={24} color="black" />
               )}
               <span
                 style={{
@@ -167,7 +181,7 @@ const Home: NextPage = () => {
                 Likes
               </span>
             </button>
-            <button onClick={() => setViewMode('itinerary')} className={styles.mode}>
+            <button type="button" onClick={() => setViewMode('itinerary')} className={styles.mode}>
               <MdOutlineCalendarMonth
                 size={24}
                 color={viewMode === 'itinerary' ? PURPLE : 'black'}
@@ -188,6 +202,7 @@ const Home: NextPage = () => {
             <div className={styles.recentItems}>
               {history.slice(0, 3).map(item => (
                 <button
+                  type="button"
                   onClick={() => {
                     setGoTo({ lat: item.coordinates.latitude, lng: item.coordinates.longitude });
                     setHistory(history => [item, ...history]);
@@ -195,20 +210,14 @@ const Home: NextPage = () => {
                   key={item.id}
                   className={styles.recentItem}
                 >
-                  <img
-                    src={item.image}
-                    alt="Item Image"
-                    width={24}
-                    height={24}
-                    className={styles.recentItemImage}
-                  />
+                  <img src={item.image} width={24} height={24} className={styles.recentItemImage} />
                   <span>{item.name}</span>
                 </button>
               ))}
             </div>
           </div>
           <div className={styles.logout}>
-            <img src={'https://source.unsplash.com/random/?big+city/'} />
+            <img src="https://source.unsplash.com/random/?big+city/" />
             <span>{session?.user?.name}</span>
             <LoginButton />
           </div>
@@ -229,6 +238,9 @@ const Home: NextPage = () => {
                 want to visit to save them for the next time you are in the area!
               </h6>
               <div className={styles.search}>
+                <button type="button" className={styles.tts} onClick={() => {}}>
+                  TALK
+                </button>
                 <input
                   type="text"
                   placeholder="Quick meals..."
@@ -241,7 +253,9 @@ const Home: NextPage = () => {
                   value={search2}
                   onChange={e => setSearch2(e.target.value)}
                 />
-                <button onClick={() => searchDiscover()}>Search</button>
+                <button type="button" onClick={() => searchDiscover()}>
+                  Search
+                </button>
               </div>
               {loading ? (
                 <div
@@ -338,8 +352,12 @@ const Home: NextPage = () => {
               <h3 className={styles.header}>Create an AI-powered itinerary.</h3>
               <h6 className={styles.subheading}>
                 Build a custom itinerary out of your liked locations! If you want more options, go
-                to the{' '}
-                <button className={styles.discoverLink} onClick={() => setViewMode('discover')}>
+                to the &nbsp;
+                <button
+                  type="button"
+                  className={styles.discoverLink}
+                  onClick={() => setViewMode('discover')}
+                >
                   Discover page{' '}
                 </button>
                 and like more locations in the area!
@@ -377,6 +395,7 @@ const Home: NextPage = () => {
                 <p key={item.id}>{item.name}</p>
               ))}
               <button
+                type="button"
                 onClick={() => {
                   setItineraryPrompt(favorites);
                   setFinalItinerary([]);
@@ -386,6 +405,7 @@ const Home: NextPage = () => {
                 Reset Itinerary Options
               </button>
               <button
+                type="button"
                 onClick={() => {
                   if (itineraryPrompt.length > 0) {
                     toast('Please include or remove all options for your itinerary!');

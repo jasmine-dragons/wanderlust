@@ -25,6 +25,7 @@ export type Styles = {
   sidebar: string;
   sidebarTitle: string;
   subheading: string;
+  tts: string;
 };
 
 export type ClassNames = keyof Styles;

@@ -6,6 +6,7 @@ const LoginButton = () => {
 
   return session?.user ? (
     <button
+      type="button"
       className={styles.logout}
       onClick={() => {
         signOut();
@@ -15,6 +16,7 @@ const LoginButton = () => {
     </button>
   ) : (
     <button
+      type="button"
       className={styles.login}
       onClick={() => {
         signIn();

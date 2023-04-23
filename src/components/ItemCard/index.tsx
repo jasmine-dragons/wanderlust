@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { AiFillHeart, AiOutlineCheck, AiOutlineHeart } from 'react-icons/ai';
 import { IoIosArrowDown } from 'react-icons/io';
 import styles from './style.module.scss';
+
 interface Prop {
   favorited: boolean;
   favorite: () => void;
@@ -37,11 +38,11 @@ const ItemCard = (props: IProps) => {
 
   return (
     <div className={styles.card}>
-      <img src={image} alt="Location Image" className={styles.cover} />
+      <img src={image} className={styles.cover} />
       <div className={styles.content}>
         <div className={styles.row}>
           <h1>{name}</h1>
-          <button className={styles.favorite} onClick={favorite}>
+          <button type="button" className={styles.favorite} onClick={favorite}>
             {favorited ? (
               <AiFillHeart color="red" size={24} />
             ) : (
@@ -58,7 +59,7 @@ const ItemCard = (props: IProps) => {
           ))}
         </div>
         {small ? (
-          <button className={styles.expand} onClick={() => setExpanded(s => !s)}>
+          <button type="button" className={styles.expand} onClick={() => setExpanded(s => !s)}>
             <IoIosArrowDown
               fill="white"
               size={24}
@@ -71,7 +72,7 @@ const ItemCard = (props: IProps) => {
         ) : null}
         {small && !expanded ? null : (
           <>
-            <hr className={styles.divider}></hr>
+            <hr className={styles.divider} />
             <p>
               {price ? `${price} · ` : ''}
               <span
@@ -102,7 +103,7 @@ const ItemCard = (props: IProps) => {
         <a href={yelpPage} className={styles.yelpLink}>
           View Website
         </a>
-        <button className={styles.yelpLink} onClick={handleMapPreview}>
+        <button type="button" className={styles.yelpLink} onClick={handleMapPreview}>
           Map
         </button>
         <a href={tiktokVideo}>

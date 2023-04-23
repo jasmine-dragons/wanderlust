@@ -7,19 +7,19 @@ type Data = any;
 const COHERE_KEY = process.env.COHERE_KEY as string;
 cohere.init(COHERE_KEY);
 
-const example = `create an itinerary for my day in Los Angeles including all of the following locations in whichever order makes the most sense:
-    - UCLA
-    - Getty Villa
-    - Hammer Museum
-    - LACMA
-    - Diddy Riese
-    - Egg Tuck
-    `;
+// const example = `create an itinerary for my day in Los Angeles including all of the following locations in whichever order makes the most sense:
+//     - UCLA
+//     - Getty Villa
+//     - Hammer Museum
+//     - LACMA
+//     - Diddy Riese
+//     - Egg Tuck
+//     `;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   if (req.method !== 'POST') return res.status(400).json({ error: 'Invalid request method' });
 
-  const prompt = req.body.prompt;
+  const { prompt } = req.body;
 
   const response = await cohere.generate({
     prompt,
@@ -30,5 +30,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     max_tokens: 1000,
   });
 
-  res.status(200).json(response.body.generations.map(a => a.text));
+  return res.status(200).json(response.body.generations.map(a => a.text));
 }

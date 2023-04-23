@@ -1,16 +1,18 @@
+/* eslint-disable import/prefer-default-export */
 export function shuffle(array: any[]) {
-  let currentIndex = array.length,
-    randomIndex;
+  const copy = [...array];
+  let currentIndex = copy.length;
+  let randomIndex;
 
   // While there remain elements to shuffle.
-  while (currentIndex != 0) {
+  while (currentIndex !== 0) {
     // Pick a remaining element.
     randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
+    currentIndex -= 1;
 
     // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    [copy[currentIndex], copy[randomIndex]] = [copy[randomIndex], copy[currentIndex]];
   }
 
-  return array;
+  return copy;
 }

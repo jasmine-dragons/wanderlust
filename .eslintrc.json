@@ -4,12 +4,11 @@
     "airbnb",
     "prettier",
     "next",
-    "next/core-web-vitals",
+    "next/core-web-vitals"
   ],
   "plugins": [
     "prettier",
     "node",
-    "@typescript-eslint",
     "import",
     "jsdoc"
   ],

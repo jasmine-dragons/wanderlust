@@ -6,8 +6,6 @@ import { useEffect, useRef } from 'react';
 import Map, { GeolocateControl, MapRef, Marker, NavigationControl } from 'react-map-gl';
 import styles from './style.module.scss';
 
-declare var window: any;
-
 const ucla: GeoLocation = {
   lng: 34.0689,
   lat: -118.4452,
@@ -50,19 +48,19 @@ const MapComponent = (props: IProps) => {
       style={{ width: '100%', height: '100%' }}
       mapStyle="mapbox://styles/nishantbalaji/clgsr9lyg001301q12ajhb47e"
     >
-      {markers.map((item: MapItemType, i: number) => (
-        <Marker key={i} {...item.coordinates}>
+      {markers.map((item: MapItemType) => (
+        <Marker key={item.id} {...item.coordinates}>
           <Image src={Pin} width={48} height={48} alt="pin" className={styles.pin} />
         </Marker>
       ))}
-      {favorites.map((item: MapItemType, i: number) => (
-        <Marker key={i} {...item.coordinates}>
+      {favorites.map((item: MapItemType) => (
+        <Marker key={item.id} {...item.coordinates}>
           <Image src={HeartPin} width={36} height={48} alt="pin" className={styles.pin} />
         </Marker>
       ))}
-      <NavigationControl position="bottom-right" visualizePitch={true} />
+      <NavigationControl position="bottom-right" visualizePitch />
       <GeolocateControl
-        trackUserLocation={true}
+        trackUserLocation
         showUserHeading={false}
         showAccuracyCircle={false}
         position="bottom-right"

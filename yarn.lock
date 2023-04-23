@@ -406,7 +406,7 @@
 
 "@types/three@^0.150.2":
   version "0.150.2"
-  resolved "https://registry.npmjs.org/@types/three/-/three-0.150.2.tgz"
+  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.150.2.tgz#6f36b299a3d21416cc07342cc87accffbde32db4"
   integrity sha512-cvcz/81Mmj4oiAA+uxzwaRK3t8lYw8WxejXKqIBfu6PqvwSAEEiCi3VfCiVY18UflBqL0LDX/za85+sfqjMoIw==
   dependencies:
     "@types/stats.js" "*"
@@ -1658,6 +1658,13 @@ eslint-plugin-react@^7.31.7, eslint-plugin-react@^7.32.2:
     resolve "^2.0.0-next.4"
     semver "^6.3.0"
     string.prototype.matchall "^4.0.8"
+
+eslint-plugin-typescript@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-typescript/-/eslint-plugin-typescript-0.14.0.tgz#068549c3f4c7f3f85d88d398c29fa96bf500884c"
+  integrity sha512-2u1WnnDF2mkWWgU1lFQ2RjypUlmRoBEvQN02y9u+IL12mjWlkKFGEBnVsjs9Y8190bfPQCvWly1c2rYYUSOxWw==
+  dependencies:
+    requireindex "~1.1.0"
 
 eslint-scope@^7.2.0:
   version "7.2.0"
@@ -3473,6 +3480,11 @@ require-from-string@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmjs.org/require-from-string/-/require-from-string-2.0.2.tgz"
   integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
+
+requireindex@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+  integrity sha512-LBnkqsDE7BZKvqylbmn7lTIVdpx4K/QCduRATpO5R+wtPmky/a8pN1bO2D6wXppn1497AJF9mNjqAXr6bdl9jg==
 
 reserved-words@^0.1.2:
   version "0.1.2"

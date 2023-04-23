@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Typist from 'react-text-typist';
+
 const LoginPage: NextPage = () => {
   const { data: session } = useSession();
   const router = useRouter();
@@ -15,12 +16,12 @@ const LoginPage: NextPage = () => {
     if (session?.user) {
       router.push('/');
     }
-  }, [session?.user]);
+  }, [session?.user, router]);
 
   return (
     <div className={styles.container}>
-      <img src={Balloon1.src} className={styles.balloon1} />
-      <img src={Balloon2.src} className={styles.balloon2} />
+      <img src={Balloon1.src} className={styles.balloon1} alt="balloon" />
+      <img src={Balloon2.src} className={styles.balloon2} alt="balloon" />
       <div className={styles.content}>
         <h1 className={styles.header}>
           <Typist

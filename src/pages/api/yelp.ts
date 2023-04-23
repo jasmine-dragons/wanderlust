@@ -1,5 +1,5 @@
-'use strict';
 import { NextApiRequest, NextApiResponse } from 'next';
+
 const yelp = require('yelp-fusion');
 
 const apiKey = process.env.YELP_KEY;

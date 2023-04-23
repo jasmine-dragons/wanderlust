@@ -13,7 +13,7 @@ const ItineraryCard = (props: IProps) => {
 
   return (
     <div className={styles.card}>
-      <img src={image} alt="Location Image" className={styles.cover} />
+      <img src={image} className={styles.cover} />
       <div className={styles.content}>
         <div className={styles.row}>
           <h1>{name}</h1>
@@ -28,11 +28,11 @@ const ItineraryCard = (props: IProps) => {
         </div>
       </div>
       <div className={styles.links}>
-        <button className={styles.noButton} onClick={noClick}>
+        <button type="button" className={styles.noButton} onClick={noClick}>
           <RxCross1 fill="#b93b3b" />
           <span>No</span>
         </button>
-        <button className={styles.yesButton} onClick={yesClick}>
+        <button type="button" className={styles.yesButton} onClick={yesClick}>
           <AiOutlineCheck fill="#3bb966" />
           <span>Yes</span>
         </button>
