@@ -207,7 +207,7 @@ const Home: NextPage = () => {
                   type="button"
                   onClick={() => {
                     setGoTo({ lat: item.coordinates.latitude, lng: item.coordinates.longitude });
-                    setHistory(history => [item, ...history]);
+                    addToHistory(item);
                   }}
                   key={item.id}
                   className={styles.recentItem}

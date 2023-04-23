@@ -7,6 +7,7 @@ export type Styles = {
   expand: string;
   favorite: string;
   links: string;
+  mapLink: string;
   row: string;
   slideIn: string;
   tags: string;

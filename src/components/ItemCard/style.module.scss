@@ -42,7 +42,7 @@
 
   .cover {
     border-radius: 0.5rem;
-    height: 200px;
+    height: auto;
     // max-height: 15rem;
     object-fit: cover;
     width: 100%;
@@ -130,6 +130,22 @@
       text-align: center;
       transition: 0.15s ease-in-out all;
       width: 100%;
+    }
+
+    .mapLink {
+      background-color: #888;
+
+      border-radius: 4px;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      transition: 0.15s ease-in-out all;
+      width: 100%;
+
+      &:hover {
+        background-color: #c8a0d8;
+      }
     }
   }
 }

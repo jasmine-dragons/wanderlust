@@ -103,7 +103,7 @@ const ItemCard = (props: IProps) => {
         <a href={yelpPage} className={styles.yelpLink}>
           View Website
         </a>
-        <button type="button" className={styles.yelpLink} onClick={handleMapPreview}>
+        <button type="button" className={styles.mapLink} onClick={handleMapPreview}>
           Map
         </button>
         <a href={tiktokVideo}>
