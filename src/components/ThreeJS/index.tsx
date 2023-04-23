@@ -32,7 +32,7 @@ Title: Binoculars
 import { useGLTF } from '@react-three/drei';
 import React from 'react';
 
-export function Binoculars(props) {
+export function Binoculars(props: any) {
   const { nodes, materials } = useGLTF('/binoculars-transformed.glb');
   const myMesh = React.useRef();
 

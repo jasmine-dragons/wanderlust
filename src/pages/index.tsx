@@ -479,7 +479,36 @@ const Home: NextPage = () => {
               </h6>
 
               {favorites.length === 0 ? (
-                <h1>Hello</h1>
+                <div
+                  style={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+                >
+                  <h1
+                    style={{
+                      color: '#888',
+                      fontSize: '16px',
+                      lineHeight: '150%',
+                      marginBottom: 'auto',
+                      padding: '4rem',
+                    }}
+                  >
+                    You need to favorite some items before you can create an itinerary! Go ahead and
+                    search for something you&apos;re interested in under the{' '}
+                    <button
+                      type="button"
+                      className={styles.discoverLink}
+                      onClick={() => setViewMode('discover')}
+                    >
+                      Discover page{' '}
+                    </button>
+                    .
+                  </h1>
+                  <Image src={Post} priority height={225} width={135} alt="Post" />
+                </div>
               ) : (
                 // TODO
                 <>
