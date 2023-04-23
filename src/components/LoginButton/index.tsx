@@ -10,6 +10,7 @@ const LoginButton = () => {
       className={styles.logout}
       onClick={() => {
         signOut();
+        localStorage.clear();
       }}
     >
       Log Out

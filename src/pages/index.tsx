@@ -7,7 +7,7 @@ import LoginButton from '@/components/LoginButton';
 import MapComponent from '@/components/Map';
 import tiktoks from '@/lib/tiktoks.json';
 import { GeoLocation, MapItemType, TiktokResponse } from '@/lib/types';
-import { shuffle } from '@/lib/utils';
+import { showToast, shuffle } from '@/lib/utils';
 import Logo from '@/public/logo.png';
 import Post from '@/public/post.png';
 import styles from '@/styles/pages/Home.module.scss';
@@ -23,8 +23,10 @@ import { CiSearch } from 'react-icons/ci';
 import { FaRegCompass } from 'react-icons/fa';
 import { MdOutlineCalendarMonth } from 'react-icons/md';
 import LoadingIcons from 'react-loading-icons';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { SlTrash } from 'react-icons/sl';
 
 const fetchPopularTiktoksForTerm = (_: string, __: string) => {
   // axios.get('tiktok.com').then().catch();
@@ -125,9 +127,13 @@ const Home: NextPage = () => {
   useEffect(() => {
     const stored = localStorage.getItem('favorites');
     setFavorites(stored ? JSON.parse(stored) : []);
+
+    const historyItems = localStorage.getItem('history');
+    setHistory(historyItems ? JSON.parse(historyItems) : []);
   }, []);
 
   const firstRun = useRef(true);
+  const firstHistory = useRef(true);
 
   useEffect(() => {
     if (firstRun.current) {
@@ -136,6 +142,14 @@ const Home: NextPage = () => {
     }
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
+
+  useEffect(() => {
+    if (firstHistory.current) {
+      firstHistory.current = false;
+      return;
+    }
+    localStorage.setItem('history', JSON.stringify(history));
+  }, [history]);
 
   useEffect(() => {
     setDisplaySearchResults(finalItinerary);
@@ -147,7 +161,7 @@ const Home: NextPage = () => {
   }, [viewMode]);
   const searchDiscover = async () => {
     if (!search1 || !search2) {
-      toast('Please enter a search query to continue');
+      showToast('Please enter a search query to continue');
       return;
     }
     setLoading(true);
@@ -210,7 +224,26 @@ const Home: NextPage = () => {
           </div>
           <hr className={styles.line} />
           <div className={styles.recents}>
-            <h6>History</h6>
+            <h6
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                gap: '4px',
+              }}
+            >
+              <span>History</span>
+              <button
+                onClick={() => setHistory([])}
+                type="button"
+                style={{
+                  all: 'unset',
+                  cursor: 'pointer',
+                }}
+              >
+                <SlTrash size={12} />
+              </button>
+            </h6>
             <div className={styles.recentItems}>
               {history.slice(0, 3).map(item => (
                 <button
@@ -444,90 +477,119 @@ const Home: NextPage = () => {
                 </button>
                 &nbsp;and like more locations in the area!
               </h6>
-              <div className={styles.carousel}>
-                {itineraryPrompt.map(item => (
-                  <ItineraryCard
-                    key={item.id}
-                    yesClick={() => {
-                      setItineraryPrompt(curr => {
-                        const clone = [...curr];
-                        const id = clone.findIndex(elem => elem.id === item.id);
-                        clone.splice(id, 1);
-                        return clone;
-                      });
-                      setFinalItinerary(curr => [...curr, item]);
-                    }}
-                    noClick={() => {
-                      setItineraryPrompt(curr => {
-                        const clone = [...curr];
-                        const id = clone.findIndex(elem => elem.id === item.id);
-                        clone.splice(id, 1);
-                        return clone;
-                      });
-                    }}
-                    {...item}
-                  />
-                ))}
-              </div>
-              <p>
-                {Math.min(favorites.length - itineraryPrompt.length + 1, favorites.length)} /{' '}
-                {favorites.length}
-              </p>
-              {finalItinerary.map(item => (
-                <p key={item.id}>{item.name}</p>
-              ))}
-              <button
-                className={styles.resetItinerary}
-                type="button"
-                onClick={() => {
-                  setItineraryPrompt(favorites);
-                  setFinalItinerary([]);
-                  setItineraryResponse('');
-                }}
-              >
-                Reset Itinerary Options
-              </button>
-              <button
-                className={styles.generateItinerary}
-                type="button"
-                onClick={() => {
-                  if (itineraryPrompt.length > 0) {
-                    toast('Please include or remove all options for your itinerary!');
-                    return;
-                  }
-                  if (finalItinerary.length === 0) {
-                    toast('You must select as least one item to include in your itinerary!');
-                    return;
-                  }
-                  setItineraryLoad(true);
-                  fetchCohere(finalItinerary.map(item => item.name))
-                    .then(() => {
-                      setItineraryLoad(false);
-                    })
-                    .catch(() => {
-                      // nothing
-                    });
-                }}
-              >
-                Generate Itinerary
-              </button>
-              {itineraryLoad ? (
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    height: '100%',
-                    gap: '1rem',
-                  }}
-                >
-                  <LoadingIcons.Puff stroke="#c8a0d8" strokeOpacity={0.75} />
-                  <h1>Thank you for your patience!</h1>
-                  <h1> ଘ(੭ˊᵕˋ)੭* ੈ✩‧˚</h1>
-                </div>
+
+              {favorites.length === 0 ? (
+                <h1>Hello</h1>
               ) : (
-                <pre className={styles.response}>{itineraryResponse}</pre>
+                // TODO
+                <>
+                  <h5>Favorite Items</h5>
+                  <div className={styles.carousel}>
+                    {itineraryPrompt.length === 0 ? (
+                      <div
+                        style={{
+                          minHeight: '5rem',
+                          width: '100%',
+                          display: 'grid',
+                          placeItems: 'center',
+                        }}
+                      >
+                        <p>No pending items.</p>
+                      </div>
+                    ) : (
+                      <>
+                        {itineraryPrompt.map(item => (
+                          <ItineraryCard
+                            key={item.id}
+                            yesClick={() => {
+                              setItineraryPrompt(curr => {
+                                const clone = [...curr];
+                                const id = clone.findIndex(elem => elem.id === item.id);
+                                clone.splice(id, 1);
+                                return clone;
+                              });
+                              setFinalItinerary(curr => [...curr, item]);
+                            }}
+                            noClick={() => {
+                              setItineraryPrompt(curr => {
+                                const clone = [...curr];
+                                const id = clone.findIndex(elem => elem.id === item.id);
+                                clone.splice(id, 1);
+                                return clone;
+                              });
+                            }}
+                            {...item}
+                          />
+                        ))}
+                      </>
+                    )}
+                  </div>
+                  <p>
+                    {favorites.length - itineraryPrompt.length} / {favorites.length} selected
+                  </p>
+                  <h5>Selected Itinerary</h5>
+                  <div>
+                    {finalItinerary.map(item => (
+                      <p key={item.id}>{item.name}</p>
+                    ))}
+                  </div>
+                  <button
+                    className={styles.resetItinerary}
+                    type="button"
+                    onClick={() => {
+                      setItineraryPrompt(favorites);
+                      setFinalItinerary([]);
+                      setItineraryResponse('');
+                    }}
+                  >
+                    Reset Itinerary Options
+                  </button>
+                  <h5>Generate</h5>
+                  <button
+                    className={styles.generateItinerary}
+                    type="button"
+                    onClick={() => {
+                      if (itineraryPrompt.length > 0) {
+                        showToast('Please include or remove all options for your itinerary!');
+                        return;
+                      }
+                      if (finalItinerary.length === 0) {
+                        showToast(
+                          'You must select as least one item to include in your itinerary!'
+                        );
+                        return;
+                      }
+                      setItineraryLoad(true);
+                      fetchCohere(finalItinerary.map(item => item.name))
+                        .then(() => {
+                          setItineraryLoad(false);
+                        })
+                        .catch(() => {
+                          // nothing
+                        });
+                    }}
+                  >
+                    Generate Itinerary
+                  </button>
+                  {itineraryLoad ? (
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        height: '100%',
+                        gap: '1rem',
+                      }}
+                    >
+                      <LoadingIcons.Puff stroke="#c8a0d8" strokeOpacity={0.75} />
+                      <h1>Thank you for your patience!</h1>
+                      <h1> ଘ(੭ˊᵕˋ)੭* ੈ✩‧˚</h1>
+                    </div>
+                  ) : (
+                    <pre className={styles.response}>{itineraryResponse}</pre>
+                  )}
+                </>
               )}
             </div>
           ) : null}
