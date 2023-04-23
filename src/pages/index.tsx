@@ -1,4 +1,5 @@
 import ItemCard from '@/components/ItemCard';
+import ItineraryCard from '@/components/ItineraryCard';
 import LoginButton from '@/components/LoginButton';
 import Map from '@/components/Map';
 import tiktoks from '@/lib/tiktoks.json';
@@ -308,6 +309,26 @@ const Home: NextPage = () => {
             <div className={styles.itinerary}>
               <h3 className={styles.header}>Create an AI-powered itinerary.</h3>
               {favorites.map(item => (
+                <ItineraryCard
+                  favorite={() => {
+                    const index = favorites.findIndex(elem => elem.id === item.id);
+
+                    if (index === -1) {
+                      setFavorites(current => [item, ...current]);
+                    } else {
+                      setFavorites(current => {
+                        const copy = [...current];
+                        copy.splice(index, 1);
+                        return copy;
+                      });
+                    }
+                  }}
+                  favorited={favorites.findIndex(elem => elem.id === item.id) !== -1}
+                  {...item}
+                  {...item}
+                />
+              ))}
+              {/* {favorites.map(item => (
                 <div key={item.id}>
                   <input
                     type="checkbox"
@@ -326,8 +347,8 @@ const Home: NextPage = () => {
                     {item.name}
                   </label>
                 </div>
-              ))}
-              <button
+              ))} */}
+              {/* <button
                 onClick={() => {
                   const on = Object.entries(listSelection)
                     .filter(([_, v]) => v === true)
@@ -337,7 +358,7 @@ const Home: NextPage = () => {
               >
                 Generate
               </button>
-              <p className={styles.itineraryResponse}>{itineraryResponse}</p>
+              <p className={styles.itineraryResponse}>{itineraryResponse}</p> */}
             </div>
           ) : null}
         </section>

@@ -1,0 +1,99 @@
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+.card {
+  animation: slideIn 0.5s;
+  border: 1.5px solid #6c6c6c;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  position: relative;
+  transition: 0.15s ease-in-out all;
+  width: 100%;
+
+  &:hover {
+    border: 1.5px solid #c8a0d8;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .cover {
+    border-radius: 0.5rem;
+    height: 90px;
+    // max-height: 15rem;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+
+      .favorite {
+        all: unset;
+        cursor: pointer;
+      }
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+
+      span {
+        background-color: #ffe3f0;
+        border-radius: 4px;
+        color: #fcafbb;
+        gap: 16px;
+        margin: 0 4px 4px 0;
+        padding: 4px 8px;
+      }
+    }
+  }
+
+  .links {
+    display: flex;
+    gap: 4px;
+    justify-content: space-between;
+
+    .noButton {
+      align-items: center;
+      background-color: #fff;
+      border: 0.8px solid #b93b3b;
+      border-radius: 3.2px;
+      display: flex;
+
+      gap: 4px;
+      height: 30px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .yesButton {
+      align-items: center;
+      background-color: #fff;
+      border: 0.8px solid #3bb966;
+      border-radius: 3.2px;
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+}
