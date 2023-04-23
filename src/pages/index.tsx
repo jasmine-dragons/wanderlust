@@ -430,11 +430,7 @@ const Home: NextPage = () => {
           ) : null}
         </section>
         <section className={styles.map}>
-          <MapComponent
-            favorites={displaySearchResults}
-            goTo={goTo}
-            markers={displaySearchResults}
-          />
+          <MapComponent favorites={favorites} goTo={goTo} markers={displaySearchResults} />
           {/* <THREEMapComponent items={displaySearchResults} callHover={() => console.log('hi')} /> */}
         </section>
       </div>
