@@ -67,9 +67,10 @@ The frontend was built in [React](https://reactjs.org/) with [Next.js](https://n
 ![image 20](https://user-images.githubusercontent.com/44332326/233846895-3a11e927-7b4d-4373-a5c7-06d6ac8c3c3d.png)
 
 
-The biggest challenges we faced mainly revolve around getting the various APIs to work together. At first, we tried to include default models such as boxes and spheres with Three.js, which was already difficult, as the mapbox react library didn’t have native support for this. However, we soon realized that these models were far too basic, and wanted to include some more complex models. This brought with it a whole different slew of issues. Putting the 3D models on the map were hard as both the documentation for Three.js and Mapbox were originally given for vanilla javascript and not our chosen React framework. Furthermore, much of the libraries made to translate code didn't support our need for putting 3D models on the map! Eventually, we found some translation libraries that converted these complex 3D models into parts, such as [GLTFJSX](https://github.com/pmndrs/gltfjsx), which let us render more models. 
+The biggest challenges we faced mainly revolve around getting the various APIs to work together. At first, we tried to include default models such as boxes and spheres with Three.js, which was already difficult, as the mapbox react library didn’t have native support for this. However, we soon realized that these models were far too basic, and wanted to include some more complex models. This brought with it a whole different slew of issues. Putting the 3D models on the map were hard as both the documentation for Three.js and Mapbox were originally given for vanilla javascript and not our chosen React framework. Furthermore, much of the libraries made to translate code didn't support our need for putting 3D models on the map! Eventually, we found some translation libraries that converted these complex 3D models into parts available in React, such as [GLTFJSX](https://github.com/pmndrs/gltfjsx), which let us render more models. 
 
-This project was also the most technically challenging design implementation we’ve ever dealt with, with the animated typing and balloons on the landing, to high quality reusable components across the main application containing hover states. In each step of the process, we challenged ourself to consider responsive components and avoid rough flashes of UI change. Cohere’s API was also a challenge we faced, as it was difficult to get it to generate the appropriate response. This required us to have to prompt it multiple times in order to get a good response, and have to carefully create a very specific prompt message to get the responses we wanted. 
+This project was also the most technically challenging design implementation we’ve ever dealt with, with the animated typing and balloons on the landing, to high quality reusable components across the main application containing hover states. In each step of the process, we challenged ourself to consider responsive components and avoid rough flashes of UI change. Cohere’s API was also a challenge we faced, as it was difficult to get it to generate the appropriate response. This required us to have to prompt it multiple times in order to get a good response, and have to carefully create a very specific prompt message to get the responses we wanted. We had to feed our results from the Yelp API into Cohere, leading to some compatibility issues as well. We eventually worked through them all one by one, and produce a successful result. 
+
 
 
 ![Tech_Stack](https://user-images.githubusercontent.com/44332326/233845823-6f90342c-b84d-482e-8610-69a1fbb0fb96.png)
@@ -84,17 +85,17 @@ Each feature on the backend was a technical challenge alone from Google Login, s
 
 ## Accomplishments that we're proud of
 Overall, we were able to implement many interesting features for wanderlust that allow for an engaged experience with us:
-Immersive, animated landing page
-Login with Google Cloud
-Discover Search Feature
-Find Top Trending Videos for the Search Term in the given location with Tiktok
-Corresponding each video to the full details of the business to generate a map and UI card with Yelp API
-Rendering an interactive map with markers, movement, and animation correctly positioned at geographic coordinates
-Adding 3D models for map marker icons
-Favorite locations to save them to the user account
-Persist favorites and history to the user account to remain on page refresh
-Generate an AI-powered travel itinerary
-Loading animations for clear UX
+- Immersive, animated landing page
+- Login with Google Cloud
+- Discover Search Feature
+- Find Top Trending Videos for the Search Term in the given location with Tiktok
+- Corresponding each video to the full details of the business to generate a map and UI card with Yelp API
+- Rendering an interactive map with markers, movement, and animation correctly positioned at geographic coordinates
+- Adding 3D models for map marker icons
+- Favorite locations to save them to the user account
+- Persist favorites and history to the user account to remain on page refresh
+- Generate an AI-powered travel itinerary
+- Loading animations for clear UX
 
 
 
