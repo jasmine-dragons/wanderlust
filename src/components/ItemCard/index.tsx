@@ -12,6 +12,7 @@ interface Prop {
   favorite: () => void;
   handleMapPreview: () => void;
   small: boolean;
+  setActiveMarker: () => void;
 }
 
 type IProps = Prop & MapItemType;
@@ -32,6 +33,7 @@ const ItemCard = (props: IProps) => {
     favorite,
     small,
     handleMapPreview,
+    setActiveMarker,
   } = props;
 
   const [expanded, setExpanded] = useState(false);
@@ -103,7 +105,14 @@ const ItemCard = (props: IProps) => {
         <a href={yelpPage} className={styles.yelpLink}>
           View Website
         </a>
-        <button type="button" className={styles.mapLink} onClick={handleMapPreview}>
+        <button
+          type="button"
+          className={styles.mapLink}
+          onClick={() => {
+            handleMapPreview();
+            setActiveMarker();
+          }}
+        >
           Map
         </button>
         <a href={tiktokVideo}>

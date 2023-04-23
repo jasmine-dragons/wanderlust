@@ -1,6 +1,7 @@
 import { Binoculars, Burger, Microphone } from '@/components/ThreeJS';
 import { GeoLocation, MapItemType } from '@/lib/types';
 import HeartPin from '@/public/heartpin.png';
+import MapPin from '@/public/mappin.png';
 import { Canvas } from '@react-three/fiber';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
@@ -16,10 +17,11 @@ interface IProps {
   markers: MapItemType[];
   goTo: GeoLocation | null;
   favorites: MapItemType[];
+  active: MapItemType | null;
 }
 
 const MapComponent = (props: IProps) => {
-  const { markers, goTo, favorites } = props;
+  const { markers, goTo, favorites, active } = props;
 
   const mapRef = useRef<MapRef>(null);
 
@@ -60,6 +62,13 @@ const MapComponent = (props: IProps) => {
       style={{ width: '100%', height: '100%' }}
       mapStyle="mapbox://styles/nishantbalaji/clgsr9lyg001301q12ajhb47e"
     >
+      {active &&
+      markers.find(e => e.id === active.id) === undefined &&
+      favorites.find(e => e.id === active.id) === undefined ? (
+        <Marker key={active.id} {...active.coordinates}>
+          <Image src={MapPin} width={36} height={48} alt="pin" className={styles.pin} />
+        </Marker>
+      ) : null}
       {markers.map((item: MapItemType) => (
         <Marker key={item.id} {...item.coordinates}>
           <Canvas>

@@ -50,8 +50,7 @@ const Home: NextPage = () => {
   const [finalItinerary, setFinalItinerary] = useState<MapItemType[]>([]);
   const [itineraryPrompt, setItineraryPrompt] = useState<MapItemType[]>([]);
   const [itineraryLoad, setItineraryLoad] = useState<boolean>(false);
-
-  // const [activeMarker, setActiveMarker] = useState<MapItemType | null>(null);
+  const [activeMarker, setActiveMarker] = useState<MapItemType | null>(null);
 
   useEffect(() => {
     setItineraryPrompt(favorites);
@@ -182,7 +181,13 @@ const Home: NextPage = () => {
       <ToastContainer />
       <div className={styles.container}>
         <section className={styles.sidebar}>
-          <Image src={Logo} alt="Website Logo" width={48} height={64} />
+          <img
+            src={Logo.src}
+            style={{
+              width: '48px',
+              height: '64px',
+            }}
+          />
           <h1 className={styles.sidebarTitle}>wanderlust</h1>
           <div className={styles.modes}>
             <button type="button" onClick={() => setViewMode('discover')} className={styles.mode}>
@@ -253,6 +258,7 @@ const Home: NextPage = () => {
                 <button
                   type="button"
                   onClick={() => {
+                    setActiveMarker(item);
                     setGoTo({ lat: item.coordinates.latitude, lng: item.coordinates.longitude });
                     addToHistory(item);
                   }}
@@ -287,9 +293,6 @@ const Home: NextPage = () => {
                 want to visit to save them for the next time you are in the area!
               </h6>
               <div className={styles.search}>
-                {/* <button type="button" className={styles.tts} onClick={() => {}}>
-                  TALK
-                </button> */}
                 <input
                   type="text"
                   placeholder="Quick meals..."
@@ -367,6 +370,7 @@ const Home: NextPage = () => {
               ) : (
                 displaySearchResults.map(item => (
                   <ItemCard
+                    setActiveMarker={() => setActiveMarker(null)}
                     handleMapPreview={() => {
                       setGoTo({
                         lat: item.coordinates.latitude,
@@ -405,6 +409,7 @@ const Home: NextPage = () => {
               </h6>
               {favorites.map(item => (
                 <ItemCard
+                  setActiveMarker={() => setActiveMarker(null)}
                   handleMapPreview={() => {
                     setGoTo({
                       lat: item.coordinates.latitude,
@@ -630,7 +635,12 @@ const Home: NextPage = () => {
           ) : null}
         </section>
         <section className={styles.map}>
-          <MapComponent favorites={favorites} goTo={goTo} markers={displaySearchResults} />
+          <MapComponent
+            active={activeMarker}
+            favorites={favorites}
+            goTo={goTo}
+            markers={displaySearchResults}
+          />
         </section>
       </div>
     </>

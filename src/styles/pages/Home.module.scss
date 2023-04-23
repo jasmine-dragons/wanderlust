@@ -26,8 +26,21 @@
     z-index: 2;
 
     .sidebarTitle {
-      color: grey;
+      // color: grey;
+      // font-size: 14px;
+      background: linear-gradient(
+        180deg,
+        #d6b599 0%,
+        #eeb7a8 21.35%,
+        #ffbec7 40.63%,
+        #d9b5e7 74.48%,
+        #ad88b7 100%
+      );
+      background-clip: text;
+      background-clip: text;
       font-size: 14px;
+      -webkit-text-fill-color: transparent;
+      // text-fill-color: transparent;
     }
 
     .modes {
