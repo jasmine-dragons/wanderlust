@@ -85,6 +85,7 @@
       gap: 4px;
       height: 30px;
       justify-content: center;
+      transition: 0.4s ease-in-out all;
       width: 100%;
 
       &:hover {
@@ -102,6 +103,7 @@
       display: flex;
       gap: 4px;
       justify-content: center;
+      transition: 0.4s ease-in-out all;
       width: 100%;
 
       &:hover {
