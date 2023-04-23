@@ -258,4 +258,8 @@
   all: unset;
   color: rgb(200, 160, 216);
   cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

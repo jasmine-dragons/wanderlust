@@ -16,8 +16,8 @@
 }
 
 .login {
-  background-color: #d6b599;
-  border: 1px solid #d6b599;
+  background-color: #c8a0d8;
+  border: 1px solid #c8a0d8;
 
   border-radius: 4px;
   color: #fff;
@@ -27,9 +27,13 @@
   transition: 0.4s ease-in-out all;
   width: 100%;
 
-  // &:hover {
-  //   background-color: #ffedf0;
-  //   // border: 2px solid #d6b599;
-  //   color: #d6b599;
-  // }
+  &:focus {
+    background-color: #c8a0d844;
+  }
+
+  &:hover {
+    background-color: #fff;
+    border: 2px solid #c8a0d8;
+    color: #c8a0d8;
+  }
 }
