@@ -70,10 +70,6 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
-    console.log(typeof favorites);
-    console.log({ favorites });
-  }, [favorites]);
-  useEffect(() => {
     if (!session?.user) router.push('/login');
   }, [session?.user]);
 
