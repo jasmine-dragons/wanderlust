@@ -168,7 +168,7 @@ const MapComponent = () => {
       mapStyle="mapbox://styles/mapbox/streets-v9"
     >
       <Marker longitude={ucla.lat} latitude={ucla.lng} anchor="bottom">
-        {/* <img src="pin.png" /> */}
+        <img src="pin.png" />
         <Canvas>
           <ambientLight />
           <pointLight position={[10, 10, 10]} />

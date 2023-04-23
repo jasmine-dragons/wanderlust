@@ -130,7 +130,7 @@ const Home: NextPage = () => {
       <div className={styles.container}>
         <section className={styles.sidebar}>
           <Image src={Logo} alt="Website Logo" width={48} height={64} />
-          <h1 className={styles.sidebarTitle}>wanderlust.</h1>
+          <h1 className={styles.sidebarTitle}>wanderlust</h1>
           <div className={styles.modes}>
             <button onClick={() => setViewMode('discover')} className={styles.mode}>
               <FaRegCompass size={24} color={viewMode === 'discover' ? PURPLE : 'black'} />
@@ -207,7 +207,6 @@ const Home: NextPage = () => {
                 }
               }}
             >
-              <h5 className={styles.discoverySubtitle}>Welcome, {session?.user?.name}</h5>
               <h3 className={styles.discoveryHeader}>Discover Nearby</h3>
               <div className={styles.search}>
                 <input
@@ -297,8 +296,8 @@ const Home: NextPage = () => {
             </div>
           ) : null}
           {viewMode === 'itinerary' ? (
-            <>
-              <h1>Create Your Perfect Daily Itinerary</h1>
+            <div className={styles.itinerary}>
+              <h3 className={styles.header}>Create an AI-powered itinerary.</h3>
               {favorites.map(item => (
                 <div key={item.id}>
                   <input
@@ -330,7 +329,7 @@ const Home: NextPage = () => {
                 Generate
               </button>
               <p className={styles.itineraryResponse}>{itineraryResponse}</p>
-            </>
+            </div>
           ) : null}
         </section>
         <section className={styles.map}>

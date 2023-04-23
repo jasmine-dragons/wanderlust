@@ -41,8 +41,9 @@
   }
 
   .cover {
-    height: auto;
-    max-height: 15rem;
+    border-radius: 0.5rem;
+    height: 200px;
+    // max-height: 15rem;
     object-fit: cover;
     width: 100%;
   }

@@ -4,6 +4,8 @@ export type Styles = {
   discovery: string;
   discoveryHeader: string;
   discoverySubtitle: string;
+  header: string;
+  itinerary: string;
   itineraryResponse: string;
   line: string;
   logout: string;

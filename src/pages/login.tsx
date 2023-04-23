@@ -24,7 +24,7 @@ const LoginPage: NextPage = () => {
       <div className={styles.content}>
         <h1 className={styles.header}>
           <Typist
-            sentences={['wanderlust. ']}
+            sentences={['wanderlust']}
             loop={false}
             typingSpeed={120}
             startDelay={750}
