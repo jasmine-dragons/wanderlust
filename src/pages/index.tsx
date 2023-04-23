@@ -173,7 +173,7 @@ const Home: NextPage = () => {
           <div className={styles.recents}>
             <h6>History</h6>
             <div className={styles.recentItems}>
-              {history.slice(0, 4).map(item => (
+              {history.slice(0, 3).map(item => (
                 <button key={item.id} className={styles.recentItem}>
                   <img
                     src={item.image}

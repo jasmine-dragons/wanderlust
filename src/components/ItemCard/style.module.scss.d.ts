@@ -3,6 +3,7 @@ export type Styles = {
   check: string;
   content: string;
   cover: string;
+  divider: string;
   favorite: string;
   links: string;
   row: string;

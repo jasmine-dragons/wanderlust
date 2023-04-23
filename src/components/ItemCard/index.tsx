@@ -46,6 +46,7 @@ const ItemCard = (props: IProps) => {
             <span key={item}>{item}</span>
           ))}
         </div>
+        <span className={styles.divider}></span>
         <p>
           {price ? `${price} · ` : ''}
           <span
