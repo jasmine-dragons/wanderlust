@@ -1,0 +1,80 @@
+.card {
+  border: 1px solid #909090;
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+
+  .cover {
+    height: auto;
+    max-height: 15rem;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+
+      .favorite {
+        all: unset;
+        cursor: pointer;
+      }
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+
+      span {
+        background-color: #d8d8d8;
+        border-radius: 4px;
+        gap: 8px;
+        margin: 0 4px 4px 0;
+        padding: 4px 8px;
+      }
+    }
+
+    .tiktokViews {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+
+      span {
+        line-height: 24px;
+      }
+    }
+
+    .transactions {
+      display: flex;
+      gap: 8px;
+
+      .check {
+        display: flex;
+        gap: 4px;
+      }
+    }
+  }
+
+  .links {
+    display: flex;
+    gap: 1.5rem;
+
+    .yelpLink {
+      border: 1px solid #000;
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      width: 100%;
+    }
+  }
+}

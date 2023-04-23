@@ -13,6 +13,8 @@ export type Styles = {
   recentItemImage: string;
   recentItems: string;
   recents: string;
+  saved: string;
+  savedHeader: string;
   search: string;
   sidebar: string;
   sidebarTitle: string;

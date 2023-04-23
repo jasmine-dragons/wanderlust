@@ -6,6 +6,7 @@
     "max-nesting-depth": null,
     "selector-max-compound-selectors": null,
     "function-parentheses-space-inside": null,
+    "color-named": null,
     "order/properties-alphabetical-order": true,
     "font-family-no-missing-generic-family-keyword": [
       true,
