@@ -9,6 +9,7 @@ import tiktoks from '@/lib/tiktoks.json';
 import { GeoLocation, MapItemType, TiktokResponse } from '@/lib/types';
 import { shuffle } from '@/lib/utils';
 import Logo from '@/public/logo.png';
+import Post from '@/public/post.png';
 import styles from '@/styles/pages/Home.module.scss';
 import axios from 'axios';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -46,6 +47,7 @@ const Home: NextPage = () => {
   const [goTo, setGoTo] = useState<GeoLocation | null>(null);
   const [finalItinerary, setFinalItinerary] = useState<MapItemType[]>([]);
   const [itineraryPrompt, setItineraryPrompt] = useState<MapItemType[]>([]);
+  const [itineraryLoad, setItineraryLoad] = useState<boolean>(false);
 
   useEffect(() => {
     setItineraryPrompt(favorites);
@@ -268,6 +270,37 @@ const Home: NextPage = () => {
                   <CiSearch size={24} />
                 </button>
               </div>
+              {!loading && displaySearchResults?.length === 0 ? (
+                <div
+                  style={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                  }}
+                >
+                  <h1
+                    style={{
+                      marginTop: 'auto',
+                      fontSize: '14px',
+                      color: '#888',
+                    }}
+                  >
+                    Enter a search to start exploring!
+                  </h1>
+                  <Image
+                    src={Post}
+                    priority
+                    height={225}
+                    width={135}
+                    style={{
+                      marginTop: 'auto',
+                    }}
+                    alt="Post"
+                  />
+                </div>
+              ) : null}
               {loading ? (
                 <div
                   style={{
@@ -356,6 +389,44 @@ const Home: NextPage = () => {
                   {...item}
                 />
               ))}
+              {favorites?.length === 0 ? (
+                <div
+                  style={{
+                    display: 'flex',
+                    width: '100%',
+                    height: '100%',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '100%',
+                      height: '10rem',
+                      marginBottom: 'auto',
+                      background: '#f9f9f9',
+                      border: '1.5px dashed #909090',
+                      strokeDasharray: 20,
+                      boxShadow: '0 5px 10px rgba(0,0,0, 0.2)',
+                      borderRadius: '8px',
+                      display: 'grid',
+                      placeItems: 'center',
+                      padding: '3rem',
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: '14px',
+                        color: '#888',
+                      }}
+                    >
+                      You have no saved locations. Please go back to discover to start building your
+                      list!
+                    </p>
+                  </div>
+                  <Image src={Post} height={225} width={135} alt="Post" priority />
+                </div>
+              ) : null}
             </div>
           ) : null}
           {viewMode === 'itinerary' ? (
@@ -428,13 +499,33 @@ const Home: NextPage = () => {
                     toast('You must select as least one item to include in your itinerary!');
                     return;
                   }
-                  fetchCohere(finalItinerary.map(item => item.name));
+                  setItineraryLoad(true);
+                  fetchCohere(finalItinerary.map(item => item.name))
+                    .then(() => {
+                      setItineraryLoad(false);
+                    })
+                    .catch(() => {
+                      // nothing
+                    });
                 }}
               >
                 Generate Itinerary
               </button>
-              {itineraryResponse?.length === 0 ? (
-                finalItinerary.map(item => <p key={item.id}>{item.name}</p>)
+              {itineraryLoad ? (
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    height: '100%',
+                    gap: '1rem',
+                  }}
+                >
+                  <LoadingIcons.Puff stroke="#c8a0d8" strokeOpacity={0.75} />
+                  <h1>Thank you for your patience!</h1>
+                  <h1> ଘ(੭ˊᵕˋ)੭* ੈ✩‧˚</h1>
+                </div>
               ) : (
                 <pre className={styles.response}>{itineraryResponse}</pre>
               )}
@@ -443,7 +534,6 @@ const Home: NextPage = () => {
         </section>
         <section className={styles.map}>
           <MapComponent favorites={favorites} goTo={goTo} markers={displaySearchResults} />
-          {/* <THREEMapComponent items={displaySearchResults} callHover={() => console.log('hi')} /> */}
         </section>
       </div>
     </>

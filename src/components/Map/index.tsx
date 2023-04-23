@@ -30,6 +30,7 @@ const MapComponent = (props: IProps) => {
 
     mapRef.current?.flyTo({
       center: [goTo.lng, goTo.lat],
+      zoom: 17,
     });
   }, [goTo]);
 
@@ -59,8 +60,8 @@ const MapComponent = (props: IProps) => {
       style={{ width: '100%', height: '100%' }}
       mapStyle="mapbox://styles/nishantbalaji/clgsr9lyg001301q12ajhb47e"
     >
-      {markers.map((item: MapItemType, i: number) => (
-        <Marker key={i} {...item.coordinates}>
+      {markers.map((item: MapItemType) => (
+        <Marker key={item.id} {...item.coordinates}>
           <Canvas>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
