@@ -1,6 +1,7 @@
+import { Binoculars, Burger, Microphone } from '@/components/ThreeJS';
 import { GeoLocation, MapItemType } from '@/lib/types';
 import HeartPin from '@/public/heartpin.png';
-import Pin from '@/public/pin.png';
+import { Canvas } from '@react-three/fiber';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import Map, { GeolocateControl, MapRef, Marker, NavigationControl } from 'react-map-gl';
@@ -32,6 +33,16 @@ const MapComponent = (props: IProps) => {
     });
   }, [goTo]);
 
+  const model = (item: MapItemType) => {
+    if (item.type === 'food') {
+      return <Burger />;
+    }
+    if (item.type === 'entertainment') {
+      return <Microphone />;
+    }
+    return <Binoculars />;
+  };
+
   return (
     <Map
       ref={mapRef}
@@ -42,15 +53,20 @@ const MapComponent = (props: IProps) => {
         zoom: 14,
         pitch: 75,
       }}
-      maxZoom={18}
-      minZoom={10}
+      // maxZoom={18}
+      // minZoom={10}
       projection="globe"
       style={{ width: '100%', height: '100%' }}
       mapStyle="mapbox://styles/nishantbalaji/clgsr9lyg001301q12ajhb47e"
     >
-      {markers.map((item: MapItemType) => (
-        <Marker key={item.id} {...item.coordinates}>
-          <Image src={Pin} width={48} height={48} alt="pin" className={styles.pin} />
+      {markers.map((item: MapItemType, i: number) => (
+        <Marker key={i} {...item.coordinates}>
+          <Canvas>
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
+            {model(item)}
+          </Canvas>
+          {/* <Image src={Pin} width={48} height={48} alt="pin" className={styles.pin} /> */}
         </Marker>
       ))}
       {favorites.map((item: MapItemType) => (

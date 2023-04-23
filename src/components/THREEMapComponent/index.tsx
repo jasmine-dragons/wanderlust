@@ -1,7 +1,8 @@
+import { Binoculars } from '@/components/ThreeJS';
 import { MapItemType } from '@/lib/types';
 import { Canvas } from '@react-three/fiber';
 import mapboxgl from 'mapbox-gl';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Map, { GeolocateControl, MapRef, Marker, NavigationControl } from 'react-map-gl';
 import { Threebox } from 'threebox-plugin';
 
@@ -140,13 +141,13 @@ interface IProps {
   items: MapItemType[];
   callHover: () => void;
 }
-const MapComponent = (props: IProps) => {
+const THREEMapComponent = (props: IProps) => {
   const { items, callHover } = props;
 
   const mapRef = useRef<MapRef>(null);
   const token = process.env.NEXT_PUBLIC_MAP_TOKEN;
 
-  useEffect({mapRef.setData()}, [items]);
+  // useEffect({mapRef.current.setData()}, [items]);
 
   const mapLoad = () => {
     const map = mapRef.current?.getMap();
@@ -154,9 +155,6 @@ const MapComponent = (props: IProps) => {
       return;
     }
     window.map = map;
-
-    // console.log({ markers });
-    // console.log(typeof markers);
 
     items.forEach((marker: MapItemType) => {
       const loc: Location = {
@@ -191,8 +189,8 @@ const MapComponent = (props: IProps) => {
         zoom: 14,
         pitch: 75,
       }}
-      maxZoom={18}
-      minZoom={12}
+      // maxZoom={18}
+      // minZoom={12}
       projection="globe"
       style={{ width: '100%', height: '100%' }}
       mapStyle="mapbox://styles/mapbox/streets-v9"
@@ -208,7 +206,7 @@ const MapComponent = (props: IProps) => {
         <Canvas>
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
-          {/* <ThreeJS /> */}
+          <Binoculars />
         </Canvas>
       </Marker>
       <NavigationControl position="bottom-right" visualizePitch={true} />
@@ -222,4 +220,4 @@ const MapComponent = (props: IProps) => {
   );
 };
 
-export default MapComponent;
+export default THREEMapComponent;

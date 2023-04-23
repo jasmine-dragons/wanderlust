@@ -4,7 +4,7 @@
 import ItemCard from '@/components/ItemCard';
 import ItineraryCard from '@/components/ItineraryCard';
 import LoginButton from '@/components/LoginButton';
-import Map from '@/components/Map';
+import MapComponent from '@/components/Map';
 import tiktoks from '@/lib/tiktoks.json';
 import { GeoLocation, MapItemType, TiktokResponse } from '@/lib/types';
 import { shuffle } from '@/lib/utils';
@@ -106,6 +106,7 @@ const Home: NextPage = () => {
           categories: data.categories.map((item: { alias: string; title: string }) => item.title),
           type: 'food',
         };
+
         setDisplaySearchResults(current => [...current, returnObject]);
         setLoading(false);
       } catch (err: any) {
@@ -429,7 +430,12 @@ const Home: NextPage = () => {
           ) : null}
         </section>
         <section className={styles.map}>
-          <Map markers={displaySearchResults} goTo={goTo} favorites={favorites} />
+          <MapComponent
+            favorites={displaySearchResults}
+            goTo={goTo}
+            markers={displaySearchResults}
+          />
+          {/* <THREEMapComponent items={displaySearchResults} callHover={() => console.log('hi')} /> */}
         </section>
       </div>
     </>
