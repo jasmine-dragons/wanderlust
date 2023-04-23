@@ -5,7 +5,9 @@ export type Styles = {
   bob2: string;
   container: string;
   content: string;
+  fade: string;
   header: string;
+  subheading: string;
 };
 
 export type ClassNames = keyof Styles;
