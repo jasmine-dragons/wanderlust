@@ -308,8 +308,9 @@ const Home: NextPage = () => {
               {!loading && displaySearchResults?.length === 0 ? (
                 <div
                   style={{
-                    height: '100%',
                     display: 'flex',
+                    width: '100%',
+                    height: '100%',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'flex-end',
@@ -317,9 +318,12 @@ const Home: NextPage = () => {
                 >
                   <h1
                     style={{
-                      marginTop: 'auto',
-                      fontSize: '14px',
+                      margin: 'auto 0',
                       color: '#888',
+                      fontSize: '16px',
+                      fontWeight: 500,
+                      lineHeight: '150%',
+                      padding: '2rem',
                     }}
                   >
                     Enter a search to start exploring!
@@ -432,33 +436,29 @@ const Home: NextPage = () => {
                     height: '100%',
                     flexDirection: 'column',
                     alignItems: 'center',
+                    justifyContent: 'flex-end',
                   }}
                 >
-                  <div
+                  <p
                     style={{
-                      width: '100%',
-                      height: '10rem',
-                      marginBottom: 'auto',
-                      background: '#f9f9f9',
-                      border: '1.5px dashed #909090',
-                      strokeDasharray: 20,
-                      boxShadow: '0 5px 10px rgba(0,0,0, 0.2)',
-                      borderRadius: '8px',
-                      display: 'grid',
-                      placeItems: 'center',
-                      padding: '3rem',
+                      color: '#888',
+                      fontSize: '16px',
+                      fontWeight: 500,
+                      lineHeight: '150%',
+                      margin: 'auto 0',
+                      padding: '2rem',
                     }}
                   >
-                    <p
-                      style={{
-                        fontSize: '14px',
-                        color: '#888',
-                      }}
+                    You have no saved locations. Please go back to&nbsp;
+                    <button
+                      type="button"
+                      className={styles.discoverLink}
+                      onClick={() => setViewMode('discover')}
                     >
-                      You have no saved locations. Please go back to discover to start building your
-                      list!
-                    </p>
-                  </div>
+                      Discover page
+                    </button>
+                    &nbsp; to start building your list!
+                  </p>
                   <Image src={Post} height={225} width={135} alt="Post" priority />
                 </div>
               ) : null}
@@ -475,7 +475,7 @@ const Home: NextPage = () => {
                   className={styles.discoverLink}
                   onClick={() => setViewMode('discover')}
                 >
-                  Discover page{' '}
+                  Discover page
                 </button>
                 &nbsp;and like more locations in the area!
               </h6>
@@ -486,6 +486,7 @@ const Home: NextPage = () => {
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
+                    justifyContent: 'flex-end',
                     alignItems: 'center',
                   }}
                 >
@@ -493,9 +494,10 @@ const Home: NextPage = () => {
                     style={{
                       color: '#888',
                       fontSize: '16px',
+                      fontWeight: 500,
                       lineHeight: '150%',
-                      marginBottom: 'auto',
-                      padding: '4rem',
+                      margin: 'auto 0',
+                      padding: '2rem',
                     }}
                   >
                     You need to favorite some items before you can create an itinerary! Go ahead and
