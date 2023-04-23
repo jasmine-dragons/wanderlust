@@ -11,8 +11,8 @@ export interface MapItemType {
   yelpPage: string;
   tiktokVideo: string;
   coordinates: {
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
   };
   impressions: number;
   displayAddress: string[];
@@ -21,4 +21,10 @@ export interface MapItemType {
   price?: string;
   categories: string[];
   phone: string;
+  type: string;
+}
+
+export interface GeoLocation {
+  lat: number;
+  lng: number;
 }

@@ -2,7 +2,7 @@ import ItemCard from '@/components/ItemCard';
 import LoginButton from '@/components/LoginButton';
 import Map from '@/components/Map';
 import tiktoks from '@/lib/tiktoks.json';
-import { MapItemType, TiktokResponse } from '@/lib/types';
+import { GeoLocation, MapItemType, TiktokResponse } from '@/lib/types';
 import { shuffle } from '@/lib/utils';
 import Logo from '@/public/logo.png';
 import styles from '@/styles/pages/Home.module.scss';
@@ -38,6 +38,8 @@ const Home: NextPage = () => {
   const [itineraryResponse, setItineraryResponse] = useState();
   const [listSelection, setListSelection] = useState<{ [key: string]: boolean }>({});
   const [history, setHistory] = useState<MapItemType[]>([]);
+
+  const [goTo, setGoTo] = useState<GeoLocation | null>(null);
 
   const fetchCohere = async (list: string[]) => {
     const prompt = `create an itinerary for my day in Los Angeles including all of the following locations in whichever order makes the most sense:
@@ -83,6 +85,7 @@ const Home: NextPage = () => {
           phone: data.phone,
           displayAddress: data.location.display_address,
           categories: data.categories.map((item: { alias: string; title: string }) => item.title),
+          type: 'food',
         };
         addToHistory(returnObject);
         setDisplaySearchResults(current => [...current, returnObject]);
@@ -248,6 +251,9 @@ const Home: NextPage = () => {
               ) : (
                 displaySearchResults.map(item => (
                   <ItemCard
+                    handleMapPreview={() =>
+                      setGoTo({ lat: item.coordinates.latitude, lng: item.coordinates.longitude })
+                    }
                     small={false}
                     key={item.id}
                     favorite={() => {
@@ -275,6 +281,9 @@ const Home: NextPage = () => {
               <h3 className={styles.savedHeader}>Saved Locations</h3>
               {favorites.map(item => (
                 <ItemCard
+                  handleMapPreview={function (): void {
+                    throw new Error('Function not implemented.');
+                  }}
                   small={favorites.length !== 1}
                   key={item.id}
                   favorite={() => {
@@ -333,7 +342,7 @@ const Home: NextPage = () => {
           ) : null}
         </section>
         <section className={styles.map}>
-          <Map markers={favorites} goTo={{ lat: 1, lng: 1 }} />
+          <Map markers={displaySearchResults} goTo={goTo} />
         </section>
       </div>
     </>

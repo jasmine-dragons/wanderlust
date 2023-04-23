@@ -9,6 +9,7 @@ import styles from './style.module.scss';
 interface Prop {
   favorited: boolean;
   favorite: () => void;
+  handleMapPreview: () => void;
   small: boolean;
 }
 
@@ -29,6 +30,7 @@ const ItemCard = (props: IProps) => {
     categories,
     favorite,
     small,
+    handleMapPreview,
   } = props;
 
   const [expanded, setExpanded] = useState(false);
@@ -96,6 +98,9 @@ const ItemCard = (props: IProps) => {
         <a href={yelpPage} className={styles.yelpLink}>
           View Website
         </a>
+        <button className={styles.yelpLink} onClick={handleMapPreview}>
+          Map
+        </button>
         <a href={tiktokVideo}>
           <Image src={TiktokDark} alt="tiktok" width={48} height={48} />
         </a>
