@@ -6,6 +6,7 @@ export type Styles = {
   favorite: string;
   links: string;
   row: string;
+  slideIn: string;
   tags: string;
   tiktokViews: string;
   transactions: string;

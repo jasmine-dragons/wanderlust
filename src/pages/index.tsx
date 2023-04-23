@@ -4,6 +4,7 @@ import MapComponent from '@/components/MapComponent';
 import tiktoks from '@/lib/tiktoks.json';
 import { MapItemType, TiktokResponse } from '@/lib/types';
 import { shuffle } from '@/lib/utils';
+import Logo from '@/public/logo.png';
 import styles from '@/styles/pages/Home.module.scss';
 import axios from 'axios';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -18,7 +19,6 @@ import { MdOutlineCalendarMonth } from 'react-icons/md';
 import LoadingIcons from 'react-loading-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 const fetchPopularTiktoksForTerm = (_: string, __: string) => {
   // axios.get('tiktok.com').then().catch();
   return tiktoks;
@@ -107,7 +107,7 @@ const Home: NextPage = () => {
       <ToastContainer />
       <div className={styles.container}>
         <section className={styles.sidebar}>
-          <h6 className={styles.sidebarTitle}>wanderlust.</h6>
+          <Image src={Logo} alt="Website Logo" width={48} height={64} />
           <div className={styles.modes}>
             <button onClick={() => setViewMode('discover')} className={styles.mode}>
               <FaRegCompass size={24} color={viewMode === 'discover' ? PURPLE : 'black'} />
@@ -155,8 +155,8 @@ const Home: NextPage = () => {
                 <Image
                   src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
                   alt="Item Image"
-                  width={64}
-                  height={64}
+                  width={24}
+                  height={24}
                   className={styles.recentItemImage}
                 />
                 <span>Marty's Pizza Parlor</span>
@@ -165,8 +165,8 @@ const Home: NextPage = () => {
                 <Image
                   src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
                   alt="Item Image"
-                  width={64}
-                  height={64}
+                  width={24}
+                  height={24}
                   className={styles.recentItemImage}
                 />
                 <span>Marty's Pizza Parlor</span>
@@ -175,8 +175,8 @@ const Home: NextPage = () => {
                 <Image
                   src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
                   alt="Item Image"
-                  width={64}
-                  height={64}
+                  width={24}
+                  height={24}
                   className={styles.recentItemImage}
                 />
                 <span>Marty's Pizza Parlor</span>
@@ -185,8 +185,8 @@ const Home: NextPage = () => {
                 <Image
                   src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
                   alt="Item Image"
-                  width={64}
-                  height={64}
+                  width={24}
+                  height={24}
                   className={styles.recentItemImage}
                 />
                 <span>Marty's Pizza Parlor</span>
