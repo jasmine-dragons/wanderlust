@@ -333,19 +333,19 @@ const Home: NextPage = () => {
                   </label>
                 </div>
               ))}
+              <button
+                onClick={() => {
+                  const on = Object.entries(listSelection)
+                    .filter(([_, v]) => v === true)
+                    .map(([k, _]) => document.getElementById(k)?.innerText) as string[];
+                  fetchCohere(on);
+                }}
+              >
+                Generate
+              </button>
+              <p className={styles.itineraryResponse}>{itineraryResponse}</p>
             </>
           ) : null}
-          <button
-            onClick={() => {
-              const on = Object.entries(listSelection)
-                .filter(([_, v]) => v === true)
-                .map(([k, _]) => document.getElementById(k)?.innerText) as string[];
-              fetchCohere(on);
-            }}
-          >
-            Generate
-          </button>
-          <p className={styles.itineraryResponse}>{itineraryResponse}</p>
         </section>
         <section className={styles.map}>
           <MapComponent />
