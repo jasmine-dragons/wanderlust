@@ -29,11 +29,11 @@ const ItineraryCard = (props: IProps) => {
       </div>
       <div className={styles.links}>
         <button type="button" className={styles.noButton} onClick={noClick}>
-          <RxCross1 fill="#b93b3b" />
+          <RxCross1 />
           <span>No</span>
         </button>
         <button type="button" className={styles.yesButton} onClick={yesClick}>
-          <AiOutlineCheck fill="#3bb966" />
+          <AiOutlineCheck />
           <span>Yes</span>
         </button>
       </div>

@@ -71,7 +71,7 @@
 
   .links {
     display: flex;
-    gap: 4px;
+    gap: 16px;
     justify-content: space-between;
 
     .noButton {
@@ -79,12 +79,18 @@
       background-color: #fff;
       border: 0.8px solid #b93b3b;
       border-radius: 3.2px;
+      color: #b93b3b;
       display: flex;
 
       gap: 4px;
       height: 30px;
       justify-content: center;
       width: 100%;
+
+      &:hover {
+        background-color: #b93b3b;
+        color: white;
+      }
     }
 
     .yesButton {
@@ -92,10 +98,16 @@
       background-color: #fff;
       border: 0.8px solid #3bb966;
       border-radius: 3.2px;
+      color: #3bb966;
       display: flex;
       gap: 4px;
       justify-content: center;
       width: 100%;
+
+      &:hover {
+        background-color: #3bb966;
+        color: white;
+      }
     }
   }
 }

@@ -18,6 +18,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { CiSearch } from 'react-icons/ci';
 import { FaRegCompass } from 'react-icons/fa';
 import { MdOutlineCalendarMonth } from 'react-icons/md';
 import LoadingIcons from 'react-loading-icons';
@@ -239,12 +240,13 @@ const Home: NextPage = () => {
                 want to visit to save them for the next time you are in the area!
               </h6>
               <div className={styles.search}>
-                <button type="button" className={styles.tts} onClick={() => {}}>
+                {/* <button type="button" className={styles.tts} onClick={() => {}}>
                   TALK
-                </button>
+                </button> */}
                 <input
                   type="text"
                   placeholder="Quick meals..."
+                  className={styles.searchText}
                   value={search1}
                   onChange={e => setSearch1(e.target.value)}
                 />
@@ -254,8 +256,8 @@ const Home: NextPage = () => {
                   value={search2}
                   onChange={e => setSearch2(e.target.value)}
                 />
-                <button type="button" onClick={() => searchDiscover()}>
-                  Search
+                <button type="button" className={styles.searchBtn} onClick={() => searchDiscover()}>
+                  <CiSearch size={24} />
                 </button>
               </div>
               {loading ? (
@@ -353,7 +355,7 @@ const Home: NextPage = () => {
               <h3 className={styles.header}>Create an AI-powered itinerary.</h3>
               <h6 className={styles.subheading}>
                 Build a custom itinerary out of your liked locations! If you want more options, go
-                to the &nbsp;
+                to the&nbsp;
                 <button
                   type="button"
                   className={styles.discoverLink}
@@ -361,7 +363,7 @@ const Home: NextPage = () => {
                 >
                   Discover page{' '}
                 </button>
-                and like more locations in the area!
+                &nbsp;and like more locations in the area!
               </h6>
               <div className={styles.carousel}>
                 {itineraryPrompt.map(item => (
@@ -396,6 +398,7 @@ const Home: NextPage = () => {
                 <p key={item.id}>{item.name}</p>
               ))}
               <button
+                className={styles.resetItinerary}
                 type="button"
                 onClick={() => {
                   setItineraryPrompt(favorites);
@@ -406,6 +409,7 @@ const Home: NextPage = () => {
                 Reset Itinerary Options
               </button>
               <button
+                className={styles.generateItinerary}
                 type="button"
                 onClick={() => {
                   if (itineraryPrompt.length > 0) {

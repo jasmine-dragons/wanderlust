@@ -6,6 +6,7 @@ export type Styles = {
   discovery: string;
   discoveryHeader: string;
   discoverySubtitle: string;
+  generateItinerary: string;
   header: string;
   itinerary: string;
   line: string;
@@ -18,10 +19,13 @@ export type Styles = {
   recentItemImage: string;
   recentItems: string;
   recents: string;
+  resetItinerary: string;
   response: string;
   saved: string;
   savedHeader: string;
   search: string;
+  searchBtn: string;
+  searchText: string;
   sidebar: string;
   sidebarTitle: string;
   subheading: string;
