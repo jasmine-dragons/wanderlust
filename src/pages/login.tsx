@@ -32,6 +32,7 @@ const LoginPage: NextPage = () => {
             cursorSmooth
           />
         </h1>
+        <h6 className={styles.subheading}>community driven exploration</h6>
         <LoginButton />
       </div>
     </div>

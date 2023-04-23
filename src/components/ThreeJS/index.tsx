@@ -1,3 +1,4 @@
+// @ts-nocheck
 // import { useFrame } from '@react-three/fiber';
 // import 'mapbox-gl/dist/mapbox-gl.css';
 // import { useRef, useState } from 'react';
