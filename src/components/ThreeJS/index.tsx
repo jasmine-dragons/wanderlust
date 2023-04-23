@@ -68,8 +68,6 @@ export function Burger(props) {
   const myMesh = React.useRef();
 
   useFrame(({ clock }) => {
-    myMesh.current.rotation.x = clock.getElapsedTime();
-    myMesh.current.rotation.z = clock.getElapsedTime();
     myMesh.current.rotation.y = clock.getElapsedTime();
   });
 
