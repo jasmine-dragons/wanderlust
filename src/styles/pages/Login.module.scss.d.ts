@@ -1,4 +1,6 @@
 export type Styles = {
+  balloon1: string;
+  balloon2: string;
   container: string;
   content: string;
   header: string;

@@ -1,17 +1,37 @@
 .container {
+  background-image: url('../../../public/login-background.png');
+  background-size: cover;
   display: grid;
-  gap: 1rem;
   height: 100vh;
+  overflow: hidden;
   place-items: center;
+
+  position: relative;
   width: 100vw;
+
+  .balloon1 {
+    height: auto;
+    left: 10%;
+    position: absolute;
+    top: 2%;
+    width: 500px;
+  }
+
+  .balloon2 {
+    height: auto;
+    position: absolute;
+    right: 10%;
+    width: 150px;
+  }
 
   .content {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    z-index: 9;
 
     .header {
-      color: black;
+      color: #ffedf0;
       font-size: 3em;
       font-weight: 700;
     }
