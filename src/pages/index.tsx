@@ -51,6 +51,8 @@ const Home: NextPage = () => {
   const [itineraryPrompt, setItineraryPrompt] = useState<MapItemType[]>([]);
   const [itineraryLoad, setItineraryLoad] = useState<boolean>(false);
 
+  // const [activeMarker, setActiveMarker] = useState<MapItemType | null>(null);
+
   useEffect(() => {
     setItineraryPrompt(favorites);
   }, [favorites]);
@@ -279,7 +281,7 @@ const Home: NextPage = () => {
                 }
               }}
             >
-              <h3 className={styles.discoveryHeader}>Discover Nearby</h3>
+              <h3 className={styles.discoveryHeader}>Inspiration For Your Next Journey</h3>
               <h6 className={styles.subheading}>
                 Search for the next trendy restaurant or new activities. Like the places that you
                 want to visit to save them for the next time you are in the area!
@@ -396,7 +398,7 @@ const Home: NextPage = () => {
           ) : null}
           {viewMode === 'saved' ? (
             <div className={styles.saved}>
-              <h3 className={styles.savedHeader}>Saved Locations</h3>
+              <h3 className={styles.savedHeader}>Meant For You</h3>
               <h6 className={styles.subheading}>
                 A list of your liked locations for you to use when building a travel itinerary in
                 any city.
@@ -466,7 +468,7 @@ const Home: NextPage = () => {
           ) : null}
           {viewMode === 'itinerary' ? (
             <div className={styles.itinerary}>
-              <h3 className={styles.header}>Create an AI-powered itinerary.</h3>
+              <h3 className={styles.header}>An AI-powered itinerary.</h3>
               <h6 className={styles.subheading}>
                 Build a custom itinerary out of your liked locations! If you want more options, go
                 to the&nbsp;
