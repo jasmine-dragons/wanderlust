@@ -130,12 +130,14 @@ const Home: NextPage = () => {
       <div className={styles.container}>
         <section className={styles.sidebar}>
           <Image src={Logo} alt="Website Logo" width={48} height={64} />
+          <h1 className={styles.sidebarTitle}>wanderlust.</h1>
           <div className={styles.modes}>
             <button onClick={() => setViewMode('discover')} className={styles.mode}>
               <FaRegCompass size={24} color={viewMode === 'discover' ? PURPLE : 'black'} />
               <span
                 style={{
                   color: viewMode === 'discover' ? PURPLE : 'black',
+                  fontSize: '12px',
                 }}
               >
                 Discover
@@ -150,6 +152,7 @@ const Home: NextPage = () => {
               <span
                 style={{
                   color: viewMode === 'saved' ? PURPLE : 'black',
+                  fontSize: '12px',
                 }}
               >
                 Likes
@@ -163,6 +166,7 @@ const Home: NextPage = () => {
               <span
                 style={{
                   color: viewMode === 'itinerary' ? PURPLE : 'black',
+                  fontSize: '12px',
                 }}
               >
                 Itinerary
@@ -188,7 +192,8 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className={styles.logout}>
-            {session?.user?.image ? <img src={session?.user?.image} /> : null}
+            <img src={'https://source.unsplash.com/random/?big+city/'} />
+            <span>{session?.user?.name}</span>
             <LoginButton />
           </div>
         </section>
@@ -207,7 +212,7 @@ const Home: NextPage = () => {
               <div className={styles.search}>
                 <input
                   type="text"
-                  placeholder="date night restaurants.."
+                  placeholder="Quick meals..."
                   value={search1}
                   onChange={e => setSearch1(e.target.value)}
                 />
@@ -269,7 +274,7 @@ const Home: NextPage = () => {
           {viewMode === 'saved' ? (
             <div className={styles.saved}>
               <h3 className={styles.savedHeader}>Saved Locations</h3>
-              {favorites.map((item, index) => (
+              {favorites.map(item => (
                 <ItemCard
                   small={favorites.length !== 1}
                   key={item.id}
