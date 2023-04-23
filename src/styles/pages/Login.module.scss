@@ -1,3 +1,23 @@
+@keyframes bob1 {
+  from {
+    transform: translateY(-10%) scale(1);
+  }
+
+  to {
+    transform: translateY(2%) scale(1.15);
+  }
+}
+
+@keyframes bob2 {
+  from {
+    transform: translateY(35%) scale(1);
+  }
+
+  to {
+    transform: translateY(25%) scale(0.85);
+  }
+}
+
 .container {
   background-image: url('../../../public/login-background.png');
   background-size: cover;
@@ -10,6 +30,7 @@
   width: 100vw;
 
   .balloon1 {
+    animation: bob1 4s ease-in-out infinite alternate-reverse;
     height: auto;
     left: 10%;
     position: absolute;
@@ -18,16 +39,20 @@
   }
 
   .balloon2 {
+    animation: bob2 2s ease-in-out infinite alternate-reverse;
     height: auto;
     position: absolute;
     right: 10%;
+    top: 35%;
     width: 150px;
   }
 
   .content {
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    width: 300px;
     z-index: 9;
 
     .header {
