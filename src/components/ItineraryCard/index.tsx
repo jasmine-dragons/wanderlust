@@ -1,16 +1,15 @@
 import { MapItemType } from '@/lib/types';
-import { AiFillHeart, AiOutlineCheck, AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineCheck } from 'react-icons/ai';
 import { RxCross1 } from 'react-icons/rx';
 import styles from './style.module.scss';
-interface Prop {
-  favorited: boolean;
-  favorite: () => void;
-}
 
-type IProps = Prop & MapItemType;
+type IProps = MapItemType & {
+  yesClick: () => void;
+  noClick: () => void;
+};
 
 const ItineraryCard = (props: IProps) => {
-  const { image, name, favorited, displayAddress, categories, favorite } = props;
+  const { image, name, displayAddress, categories, yesClick, noClick } = props;
 
   return (
     <div className={styles.card}>
@@ -18,9 +17,6 @@ const ItineraryCard = (props: IProps) => {
       <div className={styles.content}>
         <div className={styles.row}>
           <h1>{name}</h1>
-          <button className={styles.favorite} onClick={favorite}>
-            {favorited ? <AiFillHeart color="red" /> : <AiOutlineHeart color="black" />}
-          </button>
         </div>
         <div className={styles.row}>
           <p>{displayAddress.join(', ')}</p>
@@ -32,11 +28,11 @@ const ItineraryCard = (props: IProps) => {
         </div>
       </div>
       <div className={styles.links}>
-        <button className={styles.noButton}>
+        <button className={styles.noButton} onClick={noClick}>
           <RxCross1 fill="#b93b3b" />
           <span>No</span>
         </button>
-        <button className={styles.yesButton}>
+        <button className={styles.yesButton} onClick={yesClick}>
           <AiOutlineCheck fill="#3bb966" />
           <span>Yes</span>
         </button>

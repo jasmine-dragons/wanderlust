@@ -1,12 +1,12 @@
 export type Styles = {
   appear: string;
+  carousel: string;
   container: string;
   discovery: string;
   discoveryHeader: string;
   discoverySubtitle: string;
   header: string;
   itinerary: string;
-  itineraryResponse: string;
   line: string;
   logout: string;
   map: string;
@@ -17,6 +17,7 @@ export type Styles = {
   recentItemImage: string;
   recentItems: string;
   recents: string;
+  response: string;
   saved: string;
   savedHeader: string;
   search: string;

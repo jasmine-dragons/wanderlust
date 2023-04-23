@@ -18,10 +18,11 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  min-width: 300px;
   padding: 1rem;
   position: relative;
   transition: 0.15s ease-in-out all;
-  width: 100%;
+  width: 300px;
 
   &:hover {
     border: 1.5px solid #c8a0d8;

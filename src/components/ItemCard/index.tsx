@@ -42,7 +42,11 @@ const ItemCard = (props: IProps) => {
         <div className={styles.row}>
           <h1>{name}</h1>
           <button className={styles.favorite} onClick={favorite}>
-            {favorited ? <AiFillHeart color="red" /> : <AiOutlineHeart color="black" />}
+            {favorited ? (
+              <AiFillHeart color="red" size={24} />
+            ) : (
+              <AiOutlineHeart color="black" size={24} />
+            )}
           </button>
         </div>
         <div className={styles.row}>

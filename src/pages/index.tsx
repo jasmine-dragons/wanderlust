@@ -36,11 +36,17 @@ const Home: NextPage = () => {
   const [viewMode, setViewMode] = useState<'discover' | 'saved' | 'itinerary'>('discover');
   const [displaySearchResults, setDisplaySearchResults] = useState<MapItemType[]>([]);
   const [favorites, setFavorites] = useState<MapItemType[]>([]);
-  const [itineraryResponse, setItineraryResponse] = useState();
+  const [itineraryResponse, setItineraryResponse] = useState<string>();
   const [listSelection, setListSelection] = useState<{ [key: string]: boolean }>({});
   const [history, setHistory] = useState<MapItemType[]>([]);
-
   const [goTo, setGoTo] = useState<GeoLocation | null>(null);
+  const [finalItinerary, setFinalItinerary] = useState<MapItemType[]>([]);
+  const [itineraryPrompt, setItineraryPrompt] = useState<MapItemType[]>([]);
+
+  useEffect(() => console.log({ finalItinerary }), [finalItinerary]);
+  useEffect(() => {
+    setItineraryPrompt(favorites);
+  }, [favorites]);
 
   const fetchCohere = async (list: string[]) => {
     const prompt = `create an itinerary for my day in Los Angeles including all of the following locations in whichever order makes the most sense:
@@ -182,9 +188,10 @@ const Home: NextPage = () => {
             <div className={styles.recentItems}>
               {history.slice(0, 3).map(item => (
                 <button
-                  onClick={() =>
-                    setGoTo({ lat: item.coordinates.latitude, lng: item.coordinates.longitude })
-                  }
+                  onClick={() => {
+                    setGoTo({ lat: item.coordinates.latitude, lng: item.coordinates.longitude });
+                    setHistory(history => [item, ...history]);
+                  }}
                   key={item.id}
                   className={styles.recentItem}
                 >
@@ -321,57 +328,67 @@ const Home: NextPage = () => {
           {viewMode === 'itinerary' ? (
             <div className={styles.itinerary}>
               <h3 className={styles.header}>Create an AI-powered itinerary.</h3>
-              {favorites.map(item => (
-                <ItineraryCard
-                  favorite={() => {
-                    const index = favorites.findIndex(elem => elem.id === item.id);
-
-                    if (index === -1) {
-                      setFavorites(current => [item, ...current]);
-                    } else {
-                      setFavorites(current => {
-                        const copy = [...current];
-                        copy.splice(index, 1);
-                        return copy;
+              <div className={styles.carousel}>
+                {itineraryPrompt.map(item => (
+                  <ItineraryCard
+                    key={item.id}
+                    yesClick={() => {
+                      setItineraryPrompt(curr => {
+                        const clone = [...curr];
+                        const id = clone.findIndex(elem => elem.id === item.id);
+                        clone.splice(id, 1);
+                        return clone;
                       });
-                    }
-                  }}
-                  favorited={favorites.findIndex(elem => elem.id === item.id) !== -1}
-                  {...item}
-                  {...item}
-                />
-              ))}
-              {/* {favorites.map(item => (
-                <div key={item.id}>
-                  <input
-                    type="checkbox"
-                    name={item.id}
-                    checked={listSelection[item.id] === true}
-                    onChange={() => {
-                      setListSelection(curr => {
-                        const clone = { ...curr };
-                        const state = clone[item.id];
-                        clone[item.id] = !state;
+                      setFinalItinerary(curr => [...curr, item]);
+                    }}
+                    noClick={() => {
+                      setItineraryPrompt(curr => {
+                        const clone = [...curr];
+                        const id = clone.findIndex(elem => elem.id === item.id);
+                        clone.splice(id, 1);
                         return clone;
                       });
                     }}
+                    {...item}
                   />
-                  <label id={item.id} htmlFor={item.id}>
-                    {item.name}
-                  </label>
-                </div>
-              ))} */}
-              {/* <button
+                ))}
+              </div>
+              <p>
+                {Math.min(favorites.length - itineraryPrompt.length + 1, favorites.length)} /{' '}
+                {favorites.length}
+              </p>
+              {finalItinerary.map(item => (
+                <p key={item.id}>{item.name}</p>
+              ))}
+              <button
                 onClick={() => {
-                  const on = Object.entries(listSelection)
-                    .filter(([_, v]) => v === true)
-                    .map(([k, _]) => document.getElementById(k)?.innerText) as string[];
-                  fetchCohere(on);
+                  setItineraryPrompt(favorites);
+                  setFinalItinerary([]);
+                  setItineraryResponse('');
                 }}
               >
-                Generate
+                Reset Itinerary Options
               </button>
-              <p className={styles.itineraryResponse}>{itineraryResponse}</p> */}
+              <button
+                onClick={() => {
+                  if (itineraryPrompt.length > 0) {
+                    toast('Please include or remove all options for your itinerary!');
+                    return;
+                  }
+                  if (finalItinerary.length === 0) {
+                    toast('You must select as least one item to include in your itinerary!');
+                    return;
+                  }
+                  fetchCohere(finalItinerary.map(item => item.name));
+                }}
+              >
+                Generate Itinerary
+              </button>
+              {itineraryResponse?.length === 0 ? (
+                finalItinerary.map(item => <p key={item.id}>{item.name}</p>)
+              ) : (
+                <pre className={styles.response}>{itineraryResponse}</pre>
+              )}
             </div>
           ) : null}
         </section>
