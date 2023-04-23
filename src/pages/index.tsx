@@ -70,12 +70,16 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
+    console.log(typeof favorites);
+    console.log({ favorites });
+  }, [favorites]);
+  useEffect(() => {
     if (!session?.user) router.push('/login');
   }, [session?.user]);
 
   useEffect(() => {
     const stored = localStorage.getItem('favorites');
-    setFavorites(stored ? JSON.parse(stored) : '[]');
+    setFavorites(stored ? JSON.parse(stored) : []);
   }, []);
 
   const firstRun = useRef(true);
