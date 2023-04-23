@@ -1,4 +1,12 @@
 .container {
+  background: linear-gradient(
+    180deg,
+    #d6b599 0%,
+    #eeb7a8 21.35%,
+    #ffbec7 40.63%,
+    #d9b5e7 74.48%,
+    #ad88b7 100%
+  );
   display: grid;
   gap: 1rem;
   height: 100vh;
@@ -11,6 +19,7 @@
     gap: 1.5rem;
 
     .header {
+      color: white;
       font-size: 3em;
       font-weight: 700;
     }
